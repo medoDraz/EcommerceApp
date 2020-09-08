@@ -22,7 +22,7 @@
                         </li>
                         @if (auth()->user()->hasPermission('users_create'))
                             <li><a class="menu-item" href="{{route('admin.users.create')}}"
-                                   data-i18n="nav.dash.crypto">@lang('site.add')</a>
+                                   data-i18n="nav.dash.crypto">@lang('site.add_admin')</a>
                             </li>
                         @endif
                     </ul>
@@ -45,56 +45,56 @@
                         </li>
                         @if (auth()->user()->hasPermission('categories_create'))
                             <li><a class="menu-item" href="{{route('admin.categories.create')}}"
-                                   data-i18n="nav.dash.crypto">@lang('site.add_categories')</a>
+                                   data-i18n="nav.dash.crypto">@lang('site.add_category')</a>
                             </li>
                         @endif
                     </ul>
                 </li>
             @endif
 
-            {{--            @if (auth()->user()->hasPermission('sub_categories_read'))--}}
-                        <li class="nav-item @if(request()->segment(2) == 'subcategories') active @endif"><a href=""><i
-                                    class="la la-book"></i>
-                                <span class="menu-title" data-i18n="nav.dash.main"> @lang('site.sub_categories') </span>
-                                <span
-                                    class="badge badge badge-danger badge-pill float-right mr-2">{{App\Category::subCategory()->count()}}</span>
-                            </a>
-                            <ul class="menu-content">
-                                <li class="@if(request()->segment(2) == 'subcategories') active @endif">
-                                    <a class="menu-item"
-                                       href="{{route('admin.subcategories.index')}}"
-                                       data-i18n="nav.dash.ecommerce"> @lang('site.show_all') </a>
-                                </li>
-{{--                                                        @if (auth()->user()->hasPermission('sub_categories_create'))--}}
-                                <li><a class="menu-item" href="{{route('admin.subcategories.create')}}"
-                                       data-i18n="nav.dash.crypto">@lang('site.add_sub_category')</a>
-                                </li>
-{{--                                                        @endif--}}
-                            </ul>
+            @if (auth()->user()->hasPermission('sub_categories_read'))
+                <li class="nav-item @if(request()->segment(2) == 'subcategories') active @endif"><a href=""><i
+                            class="la la-book"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main"> @lang('site.sub_categories') </span>
+                        <span
+                            class="badge badge badge-danger badge-pill float-right mr-2">{{App\Category::subCategory()->count()}}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li class="@if(request()->segment(2) == 'subcategories') active @endif">
+                            <a class="menu-item"
+                               href="{{route('admin.subcategories.index')}}"
+                               data-i18n="nav.dash.ecommerce"> @lang('site.show_all') </a>
                         </li>
-{{--                                    @endif--}}
+                        @if (auth()->user()->hasPermission('sub_categories_create'))
+                            <li><a class="menu-item" href="{{route('admin.subcategories.create')}}"
+                                   data-i18n="nav.dash.crypto">@lang('site.add_sub_category')</a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+            @endif
 
-            {{--            --}}{{--            @if (auth()->user()->hasPermission('vendors_read'))--}}
-            {{--            <li class="nav-item @if(request()->segment(2) == 'vendors') active @endif"><a href=""><i--}}
-            {{--                        class="la la-male"></i>--}}
-            {{--                    <span class="menu-title" data-i18n="nav.dash.main"> @lang('site.vendors') </span>--}}
-            {{--                    <span--}}
-            {{--                        class="badge badge badge-success badge-pill float-right mr-2">{{App\Models\Vendor::count()}}</span>--}}
-            {{--                </a>--}}
-            {{--                <ul class="menu-content">--}}
-            {{--                    <li class="@if(request()->segment(2) == 'vendors') active @endif">--}}
-            {{--                        <a class="menu-item"--}}
-            {{--                           href="{{route('admin.vendors.index')}}"--}}
-            {{--                           data-i18n="nav.dash.ecommerce"> @lang('site.show_all') </a>--}}
-            {{--                    </li>--}}
-            {{--                    --}}{{--                        @if (auth()->user()->hasPermission('vendors_create'))--}}
-            {{--                    <li><a class="menu-item" href="{{route('admin.vendors.create')}}"--}}
-            {{--                           data-i18n="nav.dash.crypto">@lang('site.add_vendor')</a>--}}
-            {{--                    </li>--}}
-            {{--                    --}}{{--                        @endif--}}
-            {{--                </ul>--}}
-            {{--            </li>--}}
-            {{--            --}}{{--            @endif--}}
+            @if (auth()->user()->hasPermission('products_read'))
+                <li class="nav-item @if(request()->segment(2) == 'products') active @endif"><a href=""><i
+                            class="la la-male"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main"> @lang('site.products') </span>
+                        <span
+                            class="badge badge badge-success badge-pill float-right mr-2">{{App\Product::count()}}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li class="@if(request()->segment(2) == 'products') active @endif">
+                            <a class="menu-item"
+                               href="{{route('admin.products.index')}}"
+                               data-i18n="nav.dash.ecommerce"> @lang('site.show_all') </a>
+                        </li>
+                        @if (auth()->user()->hasPermission('products_create'))
+                            <li><a class="menu-item" href="{{route('admin.products.create')}}"
+                                   data-i18n="nav.dash.crypto">@lang('site.add_product')</a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+            @endif
 
             {{--            --}}{{--            @if (auth()->user()->hasPermission('admins_read'))--}}
             {{--            <li class="nav-item @if(request()->segment(2) == 'admins') active @endif"><a href=""><i--}}

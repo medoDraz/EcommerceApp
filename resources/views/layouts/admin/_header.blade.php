@@ -78,11 +78,11 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                             <li class="dropdown-menu-header">
-                                <h6 class="dropdown-header m-0">
-                                    <span class="grey darken-2">Notifications</span>
+                                <h6 class="dropdown-header m-0" style="text-transform: none;">
+                                    <span class="grey darken-2">@lang('site.Notifications')</span>
                                 </h6>
                                 <span
-                                    class="notification-tag badge badge-default badge-danger float-right m-0">5 New</span>
+                                    class="notification-tag badge badge-default badge-danger float-right m-0">5 @lang('site.New')</span>
                             </li>
                             <li class="scrollable-container media-list w-100">
                                 <a href="javascript:void(0)">
@@ -164,7 +164,7 @@
                                 </a>
                             </li>
                             <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center"
-                                                                href="javascript:void(0)">Read all notifications</a>
+                                                                href="javascript:void(0)">@lang('site.Read_all_notifications')</a>
                             </li>
                         </ul>
                     </li>
@@ -173,11 +173,11 @@
                                 class="ficon ft-mail"> </i></a>
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                             <li class="dropdown-menu-header">
-                                <h6 class="dropdown-header m-0">
-                                    <span class="grey darken-2">Messages</span>
+                                <h6 class="dropdown-header m-0" style="text-transform: none;">
+                                    <span class="grey darken-2">@lang('site.Messages')</span>
                                 </h6>
                                 <span
-                                    class="notification-tag badge badge-default badge-warning float-right m-0">4 New</span>
+                                    class="notification-tag badge badge-default badge-warning float-right m-0">4 @lang('site.New')</span>
                             </li>
                             <li class="scrollable-container media-list w-100">
                                 <a href="javascript:void(0)">
@@ -255,16 +255,16 @@
                                 </a>
                             </li>
                             <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center"
-                                                                href="javascript:void(0)">Read all messages</a></li>
+                                                                href="javascript:void(0)">@lang('site.Read_all_messages')</a></li>
                         </ul>
                     </li>
                     <li class="dropdown dropdown-notification nav-item">
                         <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i
                                 class="ficon ft-flag"> </i></a>
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
-                            <li class="dropdown-menu-header">
-                                <h6 class="dropdown-header m-0">
-                                    <span class="grey darken-2">choose your language</span>
+                            <li class="dropdown-menu-header" >
+                                <h6 class="dropdown-header m-0" style="text-transform: none;">
+                                    <span class="grey darken-2">@lang('site.choose_your_language')</span>
                                 </h6>
                                 <span
                                     class="notification-tag badge badge-default badge-warning float-right m-0">2</span>

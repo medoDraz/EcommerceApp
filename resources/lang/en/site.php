@@ -2,18 +2,29 @@
 
 return [
     'dashboard' => 'dashboard',
+    'welcome' => 'welcome',
     'logout' => 'logout',
 
     'add' => 'add',
+    'save' => 'save',
+    'cancel' => 'cancel',
     'create' => 'create',
     'read' => 'read',
+    'active' => 'active',
     'edit' => 'edit',
     'update' => 'update',
+    'update_profile' => 'update profile',
     'delete' => 'delete',
     'search' => 'search',
     'show' => 'show',
     'loading' => 'loading',
     'print' => 'print',
+    'New' => 'New',
+    'Notifications' => 'NOTIFICATIONS',
+    'Messages' => 'MESSAGES',
+    'Read_all_messages' => 'Read all messages',
+    'Read_all_notifications' => 'Read all notifications',
+    'choose_your_language' => 'CHOOSE THE LANGUAGE',
 
     'confirm_delete' => 'confirm delete',
     'yes' => 'yes',
@@ -32,6 +43,12 @@ return [
     'no_records' => 'no records!!',
 
     'users' => 'users',
+    'admins' => 'admins',
+    'all_admins' => 'all admins',
+    'admin_detail' => 'admin detail',
+    'edit_admin' => 'edit admin',
+    'add_admin' => 'add new admin',
+    'show_all' => 'show all',
     'action' => 'action',
     'first_name' => 'first name',
     'last_name' => 'last name',
@@ -43,7 +60,16 @@ return [
 
     'categories' => 'categories',
     'all_categories' => 'all categories',
+    'all_sub_categories' => 'all sub categories',
+    'add_sub_category' => 'add new sub category',
+    'add_category' => 'add new category',
+    'edit_category' => 'edit category',
+    'edit_sub_category' => 'edit sub category',
+    'category_detail' => 'category detail',
+    'sub_category_detail' => 'sub category detail',
+    'sub_categories' => 'sub categories',
     'name' => 'name',
+    'slug' => 'slug',
     'description' => 'description',
     'posts_count' => 'posts count',
     'related_posts' => 'related posts',
@@ -51,7 +77,14 @@ return [
     'created_at' => 'created at',
 
     'products' => 'products',
+    'all_products' => 'all products',
+    'add_product' => 'add new product',
     'product' => 'product',
+    'purchase_price' => 'purchase price',
+    'price' => 'price',
+    'sale_price' => 'sale price',
+    'amount' => 'amount',
+    'profit_percent' => 'profit percent',
 
     'articles' => 'articles',
     'posts'=>'posts',
@@ -62,6 +95,7 @@ return [
 
     'ar' => [
         'name' => 'name in arabic',
+        'slug' => 'slug in arabic',
         'description' => 'description in arabic',
         'title' => 'title in arabic',
         'body' => 'body in arabic',
@@ -69,6 +103,7 @@ return [
 
     'en' => [
         'name' => 'name in english',
+        'slug' => 'slug in english',
         'description' => 'description in english',
         'title' => 'title in english',
         'body' => 'body in english',

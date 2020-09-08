@@ -203,7 +203,7 @@
                                             {{--                                            <div id="map" style="height: 500px;width: 1000px;"></div>--}}
 
                                             @php
-                                                $models = ['users','categories'];
+                                                $models = ['users','categories','sub_categories','products'];
                                                 $maps = ['create', 'read', 'update', 'delete','active'];
                                             @endphp
 
@@ -214,7 +214,7 @@
                                                 @foreach($models   as $index =>  $model)
                                                     <optgroup label="@lang('site.' . $model)">
                                                         @foreach ($maps as $map)
-                                                            <option value="{{ $model . '_' . $map }}">{{ $model . '_' . $map }}</option>
+                                                            <option value="{{ $model . '_' . $map }}">@lang('site.' . $map) @lang('site.' . $model)   </option>
                                                         @endforeach
                                                     </optgroup>
                                                 @endforeach

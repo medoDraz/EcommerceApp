@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title')
-    <title>@lang('site.edit_admin')</title>
+    <title>@lang('site.edit_admin') {{$user->first_name}}</title>
 @endsection
 @section('content')
 
@@ -17,7 +17,7 @@
                                 <li class="breadcrumb-item"><a
                                         href="{{route('admin.users.index')}}"> @lang('site.admins') </a>
                                 </li>
-                                <li class="breadcrumb-item active">@lang('site.edit_admin')
+                                <li class="breadcrumb-item active">@lang('site.edit_admin') {{$user->first_name}}
                                 </li>
                             </ol>
                         </div>
@@ -185,7 +185,7 @@
 
                                             </div>
                                             @php
-                                                $models = ['users','categories'];
+                                                $models = ['users','categories','sub_categories','products'];
                                                 $maps = ['create', 'read', 'update', 'delete','active'];
                                             @endphp
 
@@ -196,7 +196,7 @@
                                                 @foreach($models   as $index =>  $model)
                                                     <optgroup label="@lang('site.' . $model)">
                                                         @foreach ($maps as $map)
-                                                            <option value="{{ $model . '_' . $map }}" {{ $user->haspermission($model . '_' . $map) ? 'selected' : ''}}>{{ $model . '_' . $map }}</option>
+                                                            <option value="{{ $model . '_' . $map }}" {{ $user->haspermission($model . '_' . $map) ? 'selected' : ''}}>@lang('site.' . $map) @lang('site.' . $model)</option>
                                                         @endforeach
                                                     </optgroup>
                                                 @endforeach

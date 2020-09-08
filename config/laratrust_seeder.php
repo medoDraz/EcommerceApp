@@ -16,6 +16,7 @@ return [
             'users' => 'c,r,u,d,a',
             'categories' => 'c,r,u,d,a',
             'sub_categories' => 'c,r,u,d,a',
+            'products' => 'c,r,u,d,a',
         ],
 
         'admin' => [

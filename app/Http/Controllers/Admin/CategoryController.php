@@ -89,4 +89,10 @@ class CategoryController extends Controller
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('admin.categories.index');
     }
+
+    public function getcategory($id){
+        $states = Category::where("parent_id",$id)->get();
+        return json_encode($states);
+    }
+
 }

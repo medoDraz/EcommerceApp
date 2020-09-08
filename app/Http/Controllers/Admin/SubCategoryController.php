@@ -10,13 +10,13 @@ use Illuminate\Validation\Rule;
 
 class SubCategoryController extends Controller
 {
-//    public function __construct()
-//    {
-//        $this->middleware(['permission:sub_categories_create'])->only('create');
-//        $this->middleware(['permission:sub_categories_read'])->only('read');
-//        $this->middleware(['permission:sub_categories_update'])->only('edit');
-//        $this->middleware(['permission:sub_categories_delete'])->only('destroy');
-//    }
+    public function __construct()
+    {
+        $this->middleware(['permission:sub_categories_create'])->only('create');
+        $this->middleware(['permission:sub_categories_read'])->only('read');
+        $this->middleware(['permission:sub_categories_update'])->only('edit');
+        $this->middleware(['permission:sub_categories_delete'])->only('destroy');
+    }
 
 
     public function index(Request $request)
@@ -49,7 +49,6 @@ class SubCategoryController extends Controller
         $request->validate($rules);
         if (!$request->has('active'))
             $request->request->add(['active' => 0]);
-        $request->request->add(['parent_id' => $request->category_id]);
         Category::create($request->all());
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.subcategories.index');
@@ -78,23 +77,25 @@ class SubCategoryController extends Controller
 //        dd($subcategory);
         $rules = [];
         foreach (config('translatable.locales') as $locale) {
-            $rules += [$locale . '.name' => ['required', Rule::unique('category_translations', 'name')]];
-            $rules += [$locale . '.slug' => ['required', Rule::unique('category_translations', 'slug')]];
+            $rules += [$locale . '.name' => ['required', Rule::unique('category_translations', 'name')->ignore($subcategory->id, 'category_id')]];
+            $rules += [$locale . '.slug' => ['required', Rule::unique('category_translations', 'slug')->ignore($subcategory->id, 'category_id')]];
         }//end of for each
 //dd($rules);
         $request->validate($rules);
         if (!$request->has('active'))
             $request->request->add(['active' => 0]);
-        $request->request->add(['parent_id' => $request->category_id]);
-        dd($request);
+//        dd($request);
         $subcategory->update($request->all());
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.subcategories.index');
     }
 
 
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $subcategory=Category::find($id);
+        $subcategory->delete();
+        session()->flash('success', __('site.deleted_successfully'));
+        return redirect()->route('admin.subcategories.index');
     }
 }

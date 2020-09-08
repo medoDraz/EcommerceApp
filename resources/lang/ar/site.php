@@ -58,7 +58,7 @@ return [
     'status' => 'الحالة',
     'title' => 'العنوان',
     'name'=>'الإسم',
-    'quantity' => 'الكميه',
+    'amount' => 'الكميه',
     'total' => 'المجموع',
     'purchase_price' => 'سعر الشراء',
     'price' => 'السعر',
@@ -68,6 +68,7 @@ return [
 
     'ar' => [
         'name' => 'الاسم بالغه العربيه',
+        'slug' => 'slug بالغه العربيه',
         'description' => 'الوصف بالغه العربيه',
         'title' => 'العنوان بالغه العربيه',
         'body' => 'المحتوى بالغه العربيه',
@@ -75,9 +76,51 @@ return [
 
     'en' => [
         'name' => 'الاسم بالغه الانجليزيه',
+        'slug' => 'slug بالغه الانجليزيه',
         'description' => 'الوصف بالغه الانجليزيه',
         'title' => 'العنوان بالغه الانجليزيه',
         'body' => 'المحتوى بالغه الانجليزيه',
     ],
 
+    'welcome' => 'مرحباً',
+
+    'save' => 'حفظ',
+    'cancel' => 'رجوع',
+    'active' => 'تفعيل',
+    'update_profile' => 'تعديل الملف الشخصى',
+    'Notifications' => 'الإشعارات',
+    'Messages' => 'الرسائل',
+    'Read_all_messages' => 'قراءة كل الرسائل',
+    'Read_all_notifications' => 'قراءة كل الإشعارات',
+    'choose_your_language' => 'إختر اللغة',
+    'New' => 'جديدة',
+
+
+    'admins' => 'المشرفين',
+    'all_admins' => 'كل المشرفين',
+    'admin_detail' => 'تفاصيل المشرف',
+    'edit_admin' => 'تعديل المشرف',
+    'add_admin' => 'إضافة مشرف جديد',
+    'show_all' => 'عرض الكل',
+
+    'all_sub_categories' => 'كل الأقسام الفرعية',
+    'add_sub_category' => 'إضافة قسم فرعى جديد',
+    'add_category' => 'إضافة قسم جديد',
+    'edit_category' => 'تعديل قسم',
+    'edit_sub_category' => 'تعديل قسم فرعى',
+    'category_detail' => 'تفاصيل القسم',
+    'sub_category_detail' => 'تفاصيل القسم الفرعى',
+    'sub_categories' => 'الأقسام الفرعية',
+
+    'slug' => 'slug',
+    'description' => 'الوصف',
+    'created_at' => 'created at',
+
+    'products' => 'المنتجات',
+    'all_products' => 'كل المنتجات',
+    'add_product' => 'إضافة منتج جديد',
+    'product' => 'المنتج',
+
+
 ];
+

@@ -61,7 +61,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group mt-1">
                                                             <label>@lang('site.categories')</label>
-                                                            <select name="category_id" class="form-control">
+                                                            <select name="parent_id" class="form-control">
                                                                 <option value="">@lang('site.all_categories')</option>
                                                                 @foreach ($categories as $category)
                                                                     <option class="custom-select" value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>

@@ -107,7 +107,7 @@
                                                                             {{ csrf_field() }}
                                                                             {{ method_field('delete') }}
                                                                             <button type="submit" style="color: #1E9FF2;"
-                                                                               class=" delete px-2 mr-1 mb-1">
+                                                                               class="btn btn-link delete px-2 mr-1 mb-1">
                                                                                 <i class="la la-trash"></i>
                                                                                 @lang('site.delete')
                                                                             </button>

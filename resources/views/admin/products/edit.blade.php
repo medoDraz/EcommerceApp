@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title')
-    <title>@lang('site.edit_sub_category')</title>
+    <title>@lang('site.edit_category')</title>
 @endsection
 @section('content')
 
@@ -17,7 +17,7 @@
                                 <li class="breadcrumb-item"><a
                                         href="{{route('admin.categories.index')}}"> @lang('site.categories') </a>
                                 </li>
-                                <li class="breadcrumb-item active">@lang('site.edit_sub_category')
+                                <li class="breadcrumb-item active">@lang('site.edit_category')
                                 </li>
                             </ol>
                         </div>
@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title" id="basic-layout-form"> @lang('site.edit_sub_category') </h3>
+                                    <h3 class="card-title" id="basic-layout-form"> @lang('site.add_category') </h3>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -47,7 +47,7 @@
                                 {{--                                @include('admin.includes.alerts.errors')--}}
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.subcategories.update',$subcategory->id)}}"
+                                        <form class="form" action="{{route('admin.categories.update',$category->id)}}"
                                               method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
@@ -55,21 +55,8 @@
                                             <div class="form-body">
 
                                                 <h4 class="form-section"><i
-                                                        class="ft-home"></i> @lang('site.sub_category_detail') </h4>
+                                                        class="ft-home"></i> @lang('site.category_detail') </h4>
 
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mt-1">
-                                                            <label>@lang('site.categories')</label>
-                                                            <select name="parent_id" class="form-control">
-                                                                <option value="">@lang('site.all_categories')</option>
-                                                                @foreach ($categories as $category)
-                                                                    <option class="custom-select" value="{{ $category->id }}" {{ $subcategory->parent_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <div class="row">
                                                     @foreach (config('translatable.locales') as $locale)
                                                         <div class="col-md-6">
@@ -80,7 +67,7 @@
                                                                        class="form-control"
                                                                        placeholder="  "
                                                                        name="{{ $locale }}[name]"
-                                                                       value="{{ $subcategory->name }}">
+                                                                       value="{{ $category->name }}">
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -96,7 +83,7 @@
                                                                        class="form-control"
                                                                        placeholder="  "
                                                                        name="{{ $locale }}[slug]"
-                                                                       value="{{ $subcategory->slug }}">
+                                                                       value="{{ $category->slug }}">
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -111,7 +98,7 @@
                                                                name="active"
                                                                id="switcheryColor4"
                                                                class="switchery" data-color="success"
-                                                               @if($subcategory -> active  == 1 ) checked @endif/>
+                                                               @if($category -> active  == 1 ) checked @endif/>
                                                         <label for="switcheryColor4"
                                                                class="card-title ml-1">@lang('site.active')</label>
                                                     </div>

@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title')
-    <title>@lang('site.sub_categories')</title>
+    <title>@lang('site.products')</title>
 @endsection
 @section('content')
     <div class="app-content content">
@@ -14,7 +14,7 @@
                                 <li class="breadcrumb-item"><a href="{{route('admin.welcome')}}"><i
                                             class="la la-home"></i> @lang('site.dashboard') </a>
                                 </li>
-                                <li class="breadcrumb-item active"> @lang('site.sub_categories')
+                                <li class="breadcrumb-item active"> @lang('site.products')
                                 </li>
                             </ol>
                         </div>
@@ -28,21 +28,21 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">@lang('site.all_sub_categories')</h4>
+                                    <h4 class="card-title">@lang('site.all_products')</h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
                                             <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                             <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                            {{--                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>--}}
+{{--                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>--}}
                                             {{-- <li><a data-action="close"><i class="ft-x"></i></a></li> --}}
                                         </ul>
                                     </div>
                                 </div>
 
-                                {{--                                @include('admin.includes.alerts.success')--}}
-                                {{--                                @include('admin.includes.alerts.errors')--}}
+{{--                                @include('admin.includes.alerts.success')--}}
+{{--                                @include('admin.includes.alerts.errors')--}}
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
@@ -52,26 +52,27 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>@lang('site.name')</th>
-                                                <th>@lang('site.slug')</th>
-                                                <th>@lang('site.category')</th>
+                                                <th>@lang('site.image')</th>
+                                                <th>@lang('site.purchase_price')</th>
+                                                <th>@lang('site.sale_price')</th>
+                                                <th>@lang('site.profit_percent')</th>
+                                                <th>@lang('site.amount')</th>
                                                 <th>@lang('site.action')</th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                            @isset($subcategories)
-                                                @foreach($subcategories as $index=>$subcategory)
+                                            @isset($products)
+                                                @foreach($products as $index=>$product)
                                                     <tr class="text-center">
                                                         <td>{{ $index + 1 }}</td>
-                                                        <td>{{$subcategory -> name}}</td>
-                                                        <td>{{$subcategory -> slug}}</td>
-                                                        @foreach($categories as $category)
-                                                            @if($subcategory->parent_id == $category->id)
-                                                                <td>{{$category->name}}</td>
-                                                            @endif
-                                                        @endforeach
-
-                                                        <td>
+                                                        <td>{{$product -> name}}</td>
+                                                        <td><img src="{{ $product->image_path}}" class="img-thumbnail"
+                                                                 style="width: 150px;" alt=""></td>
+                                                        <td>{{$product -> purchase_price}}</td>
+                                                        <td>{{$product -> sale_price}}</td>
+                                                        <td>{{$product -> profit_percent}}</td>
+                                                        <td>{{$product -> amount}}</td>                                                        <td>
                                                             <div class="btn-group float-md-right" role="group"
                                                                  aria-label="Button group with nested dropdown">
                                                                 <button
@@ -83,32 +84,30 @@
                                                                 </button>
                                                                 <div class="dropdown-menu"
                                                                      aria-labelledby="btnGroupDrop1">
-                                                                    @if (auth()->user()->hasPermission('sub_categories_read'))
-                                                                        <a href="{{ route('admin.subcategories.show',$subcategory -> id) }}"
-                                                                           class="px-2">
-                                                                            <i class="la la-eye"></i>
-                                                                            @lang('site.show')
-                                                                        </a>
-                                                                    @endif
+                                                                    @if (auth()->user()->hasPermission('products_read'))
+                                                                    <a href="{{ route('admin.products.show',$product -> id) }}"
+                                                                       class="px-2">
+                                                                        <i class="la la-eye"></i>
+                                                                        @lang('site.show')
+                                                                    </a>
+                                                                                                                                    @endif
 
-                                                                    @if (auth()->user()->hasPermission('sub_categories_update'))
-                                                                        <a href="{{ route('admin.subcategories.edit',$subcategory -> id) }}"
+                                                                    @if (auth()->user()->hasPermission('products_update'))
+                                                                        <a href="{{ route('admin.products.edit',$product -> id) }}"
                                                                            class="px-2 ">
                                                                             <i class="la la-edit"></i>
                                                                             @lang('site.edit')
                                                                         </a>
                                                                     @endif
 
-                                                                    @if (auth()->user()->hasPermission('sub_categories_delete'))
+                                                                    @if (auth()->user()->hasPermission('products_delete'))
                                                                         <form
-                                                                            action="{{ route('admin.subcategories.destroy',$subcategory -> id) }}"
-                                                                            method="post"
-                                                                            style="display: inline-block;">
+                                                                            action="{{ route('admin.products.destroy',$product -> id) }}"
+                                                                            method="post" style="display: inline-block;">
                                                                             {{ csrf_field() }}
                                                                             {{ method_field('delete') }}
-                                                                            <button type="submit"
-                                                                                    style="color: #1E9FF2;"
-                                                                                    class="btn btn-link delete px-2 mr-1 mb-1">
+                                                                            <button type="submit" style="color: #1E9FF2;"
+                                                                               class="btn btn-link delete px-2 mr-1 mb-1">
                                                                                 <i class="la la-trash"></i>
                                                                                 @lang('site.delete')
                                                                             </button>
