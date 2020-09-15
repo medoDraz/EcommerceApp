@@ -17,6 +17,8 @@ return [
             'categories' => 'c,r,u,d,a',
             'sub_categories' => 'c,r,u,d,a',
             'products' => 'c,r,u,d,a',
+            'tags' => 'c,r,u,d,a',
+            'comments' => 'r,u,d,a',
         ],
 
         'admin' => [

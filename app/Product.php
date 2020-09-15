@@ -10,7 +10,7 @@ class Product extends Model
 {
     use Translatable;
 
-    protected $fillable = ['category_id','subcategory_id','image','sale_price','purchase_price','amount','active'];
+    protected $fillable = ['category_id','subcategory_id','image','sale_price','purchase_price','amount','active','tag_ids'];
     public $translatedAttributes = ['name','description','slug'];
     protected $guarded=[];
     protected $appends = ['image_path', 'profit_percent'];
@@ -33,4 +33,9 @@ class Product extends Model
     public function category() {
         return $this->belongsTo(Category::class);
     }
+
+    public function tags()
+	{
+	    return $this->belongsToMany(Tag::class);
+	}
 }

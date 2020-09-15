@@ -24,7 +24,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
             Route::get('subcategories/editactive/{cat_id}', 'SubCategoryController@editactive')->name('subcategories.editactive');
 ///////////////////////Product Route ////////////////////////////////////
             Route::resource('products','ProductController');
-            Route::get('ProductController/editactive/{cat_id}', 'ProductController@editactive')->name('products.editactive');
+            Route::get('products/editactive/{cat_id}', 'ProductController@editactive')->name('products.editactive');
+//////////////////////////Tag Route ///////////////////////////////////////
+            Route::resource('tags','TagController');
+            Route::get('tags/editactive/{cat_id}', 'TagController@editactive')->name('tags.editactive');
 
         });
     });

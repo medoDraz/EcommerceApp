@@ -118,8 +118,18 @@ return [
 
     'products' => 'المنتجات',
     'all_products' => 'كل المنتجات',
+    'edit_product' => 'تعديل المنتج',
+    'product_detail' => 'تفاصيل المنتج',
     'add_product' => 'إضافة منتج جديد',
     'product' => 'المنتج',
+
+    'tags' => 'الاوسمة',
+    'all_tags' => 'كل الاوسمة',
+    'add_tag' => 'إضافة وسم جديد',
+    'tag_detail' => 'تفاصيل الوسم',
+    'edit_tag' => 'تعديل الوسم',
+
+    'clients' => 'العملاء',
 
 
 ];

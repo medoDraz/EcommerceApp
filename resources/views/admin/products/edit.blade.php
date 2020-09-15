@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title')
-    <title>@lang('site.edit_category')</title>
+    <title>@lang('site.edit_product')</title>
 @endsection
 @section('content')
 
@@ -15,9 +15,9 @@
                                             class="la la-home"></i> @lang('site.dashboard') </a>
                                 </li>
                                 <li class="breadcrumb-item"><a
-                                        href="{{route('admin.categories.index')}}"> @lang('site.categories') </a>
+                                        href="{{route('admin.products.index')}}"> @lang('site.products') </a>
                                 </li>
-                                <li class="breadcrumb-item active">@lang('site.edit_category')
+                                <li class="breadcrumb-item active">@lang('site.edit_product')
                                 </li>
                             </ol>
                         </div>
@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title" id="basic-layout-form"> @lang('site.add_category') </h3>
+                                    <h3 class="card-title" id="basic-layout-form"> @lang('site.edit_product') </h3>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -47,15 +47,72 @@
                                 {{--                                @include('admin.includes.alerts.errors')--}}
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.categories.update',$category->id)}}"
+                                        <form class="form" action="{{route('admin.products.update',$product->id)}}"
                                               method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
                                             {{ method_field('put') }}
                                             <div class="form-body">
 
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label> @lang('site.image') </label>
+                                                            <label id="projectinput7" class="file center-block">
+                                                                <input type="file" id="file" name="image" class="photo">
+                                                                <span class="file-custom"></span>
+                                                            </label>
+                                                            @error('image')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <img src="{{$product->image_path}}"
+                                                                 style="width: 150px"
+                                                                 class="img-thumbnail image-preview" alt="">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
                                                 <h4 class="form-section"><i
-                                                        class="ft-home"></i> @lang('site.category_detail') </h4>
+                                                        class="ft-home"></i> @lang('site.product_detail') </h4>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group mt-1">
+                                                            <label>@lang('site.categories')</label>
+                                                            <select name="category_id" class="form-control">
+                                                                <option value="">@lang('site.all_categories')</option>
+                                                                @foreach ($categories as $category)
+                                                                    <option class="custom-select"
+                                                                            value="{{ $category->id }}" {{ $product->category->id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group mt-1">
+                                                            <label>@lang('site.sub_categories')</label>
+                                                            <select name="subcategory_id" class="form-control">
+                                                                <option
+                                                                    value="">@lang('site.all_sub_categories')</option>
+                                                                @foreach ($subcategories as $subcategory)
+                                                                    @foreach ($categories as $category)
+                                                                        @if($subcategory->parent_id == $category->id && $category->id == $product->category_id)
+                                                                            <option class="custom-select"
+                                                                                    value="{{ $subcategory->id }}"
+                                                                                {{ $product->subcategory_id == $subcategory->id ? 'selected' : '' }}>
+                                                                                {{ $subcategory->name }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                                 <div class="row">
                                                     @foreach (config('translatable.locales') as $locale)
@@ -67,7 +124,24 @@
                                                                        class="form-control"
                                                                        placeholder="  "
                                                                        name="{{ $locale }}[name]"
-                                                                       value="{{ $category->name }}">
+                                                                       value="{{ $product->name }}">
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+
+                                                <div class="row">
+                                                    @foreach (config('translatable.locales') as $locale)
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label
+                                                                    for="projectinput1">@lang('site.' . $locale . '.description')</label>
+                                                                <textarea type="text"
+                                                                          class="form-control"
+                                                                          placeholder="  "
+                                                                          name="{{ $locale }}[description]"
+                                                                          value="{{ $product->description }}"
+                                                                >{{ $product->description }}</textarea>
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -83,27 +157,76 @@
                                                                        class="form-control"
                                                                        placeholder="  "
                                                                        name="{{ $locale }}[slug]"
-                                                                       value="{{ $category->slug }}">
+                                                                       value="{{ $product->slug }}">
                                                             </div>
                                                         </div>
                                                     @endforeach
                                                 </div>
 
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="projectinput1">@lang('site.purchase_price')</label>
+                                                            <input type="number"
+                                                                   class="form-control"
+                                                                   placeholder="  "
+                                                                   name="purchase_price"
+                                                                   step="0.01"
+                                                                   value="{{ $product->purchase_price }}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="projectinput1">@lang('site.sale_price')</label>
+                                                            <input type="number"
+                                                                   class="form-control"
+                                                                   placeholder="  "
+                                                                   name="sale_price"
+                                                                   step="0.01"
+                                                                   value="{{ $product->sale_price }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label
+                                                            for="projectinput1">@lang('site.amount')</label>
+                                                        <input type="number"
+                                                               class="form-control"
+                                                               placeholder="  "
+                                                               name="amount"
+                                                               value="{{ $product->amount }}">
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-md-6">
                                                     <div class="form-group mt-1">
                                                         <input type="checkbox" value="1"
                                                                name="active"
                                                                id="switcheryColor4"
                                                                class="switchery" data-color="success"
-                                                               @if($category -> active  == 1 ) checked @endif/>
+                                                               @if($product -> active  == 1 ) checked @endif/>
                                                         <label for="switcheryColor4"
                                                                class="card-title ml-1">@lang('site.active')</label>
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <h4 class="form-section"><i
+                                                    class="la la-list-alt"></i>@lang('site.tags')</h4>
+                                            <select class="select2 form-control" name="tags[]"
+                                                    multiple="multiple">
+                                                @foreach($tags   as $index =>  $tag)
+                                                    <option value="{{ $tag->id }}"
+                                                    {{ in_array($tag->id, explode(',', $product->tag_ids)) ? 'selected' : '' }} >{{$tag->name}}</option>
+                                                @endforeach
+                                            </select>
 
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"
@@ -115,8 +238,6 @@
                                                 </button>
                                             </div>
                                         </form>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -127,10 +248,46 @@
             </div>
         </div>
     </div>
-
 @endsection
 @section('script')
     <script>
+
+        $(document).ready(function () {
+
+            // $(".dropdown-toggle").dropdown();
+
+            $('select[name="category_id"]').on('change', function () {
+                var categoryId = $(this).val();
+                console.log(categoryId);
+
+
+                if (categoryId) {
+
+
+                    $.ajax({
+                        url: '/admin/subcategory/' + categoryId,
+                        type: "GET",
+                        dataType: "json",
+
+                        success: function (data) {
+                            console.log(data);
+                            $('select[name="subcategory_id"]').empty();
+
+                            $('select[name="subcategory_id"]').append('<option value="">@lang('site.all_sub_categories')</option>');
+                            $.each(data, function (key, value) {
+
+                                $('select[name="subcategory_id"]').append('<option value="' + value['id'] + '">  ' + value['name'] + '  </option>');
+
+                            });
+                        }
+                    });
+                } else {
+                    $('select[name="subcategory_id"]').empty();
+                }
+
+            });
+        });
+
         $('.image').change(function () {
             if (this.files && this.files[0]) {
                 var reader = new FileReader();

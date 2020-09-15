@@ -69,8 +69,8 @@ class CategoryController extends Controller
 
         foreach (config('translatable.locales') as $locale) {
 
-            $rules += [$locale . '.name' => ['required', Rule::unique('category_translations', 'name')]];
-            $rules += [$locale . '.slug' => ['required', Rule::unique('category_translations', 'slug')]];
+            $rules += [$locale . '.name' => ['required', Rule::unique('category_translations', 'name')->ignore($category->id, 'category_id')]];
+            $rules += [$locale . '.slug' => ['required', Rule::unique('category_translations', 'slug')->ignore($category->id, 'category_id')]];
 
         }//end of for each
 
@@ -93,6 +93,18 @@ class CategoryController extends Controller
     public function getcategory($id){
         $states = Category::where("parent_id",$id)->get();
         return json_encode($states);
+    }
+
+    public function editactive($cat_id)
+    {
+        try{
+            $cat = Category::find($cat_id);
+            $status = $cat->active == 0 ? 1 : 0;
+            $cat->update(['active' => $status]);
+            return redirect()->route('admin.categories.index')->with(['success' => 'تم تحديث الحالة بنجاح']);
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.categories.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
     }
 
 }

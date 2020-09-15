@@ -132,7 +132,8 @@
                                                                           class="form-control"
                                                                           placeholder="  "
                                                                           name="{{ $locale }}[description]"
-                                                                          value="{{ old($locale . '.description') }}"></textarea>
+                                                                          value="{{ old($locale . '.description') }}">
+                                                                    {{ old($locale . '.description') }}</textarea>
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -214,6 +215,15 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <h4 class="form-section"><i
+                                                    class="la la-list-alt"></i>@lang('site.tags')</h4>
+                                            <select class="select2 form-control" name="tags[]"
+                                                    multiple="multiple">
+                                                @foreach($tags   as $index =>  $tag)
+                                                    <option value="{{ $tag->id }}"> {{$tag->name}}</option>
+                                                @endforeach
+                                            </select>
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"
                                                         onclick="history.back();">

@@ -185,7 +185,7 @@
 
                                             </div>
                                             @php
-                                                $models = ['users','categories','sub_categories','products'];
+                                                $models = ['users','categories','sub_categories','products','tags'];
                                                 $maps = ['create', 'read', 'update', 'delete','active'];
                                             @endphp
 

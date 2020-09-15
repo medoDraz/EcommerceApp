@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title')
-    <title>@lang('site.products')</title>
+    <title>@lang('site.tags')</title>
 @endsection
 @section('content')
     <div class="app-content content">
@@ -14,7 +14,7 @@
                                 <li class="breadcrumb-item"><a href="{{route('admin.welcome')}}"><i
                                             class="la la-home"></i> @lang('site.dashboard') </a>
                                 </li>
-                                <li class="breadcrumb-item active"> @lang('site.products')
+                                <li class="breadcrumb-item active"> @lang('site.tags')
                                 </li>
                             </ol>
                         </div>
@@ -28,7 +28,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">@lang('site.all_products')</h4>
+                                    <h4 class="card-title">@lang('site.all_tags')</h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -52,27 +52,19 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>@lang('site.name')</th>
-                                                <th>@lang('site.image')</th>
-{{--                                                <th>@lang('site.purchase_price')</th>--}}
-                                                <th>@lang('site.sale_price')</th>
-                                                <th>@lang('site.profit_percent')</th>
-                                                <th>@lang('site.amount')</th>
+                                                <th>@lang('site.products')</th>
                                                 <th>@lang('site.action')</th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                            @isset($products)
-                                                @foreach($products as $index=>$product)
+                                            @isset($tags)
+                                                @foreach($tags as $index=>$tag)
                                                     <tr class="text-center">
                                                         <td>{{ $index + 1 }}</td>
-                                                        <td>{{$product -> name}}</td>
-                                                        <td><img src="{{ $product->image_path}}" class="img-thumbnail"
-                                                                 style="width: 120px;" alt=""></td>
-{{--                                                        <td>{{$product -> purchase_price}}</td>--}}
-                                                        <td>{{$product -> sale_price}}</td>
-                                                        <td>{{$product -> profit_percent}}</td>
-                                                        <td>{{$product -> amount}}</td>                                                        <td>
+                                                        <td>{{$tag -> name}}</td>
+                                                        <td><a href="" class="btn btn-info btn-sm">@lang('site.products')</a></td>
+                                                        <td>
                                                             <div class="btn-group float-md-right" role="group"
                                                                  aria-label="Button group with nested dropdown">
                                                                 <button
@@ -84,25 +76,25 @@
                                                                 </button>
                                                                 <div class="dropdown-menu"
                                                                      aria-labelledby="btnGroupDrop1">
-                                                                    @if (auth()->user()->hasPermission('products_read'))
-                                                                    <a href="{{ route('admin.products.show',$product -> id) }}"
+                                                                    @if (auth()->user()->hasPermission('tags_read'))
+                                                                    <a href="{{ route('admin.tags.show',$tag -> id) }}"
                                                                        class="px-2">
                                                                         <i class="la la-eye"></i>
                                                                         @lang('site.show')
                                                                     </a>
                                                                                                                                     @endif
 
-                                                                    @if (auth()->user()->hasPermission('products_update'))
-                                                                        <a href="{{ route('admin.products.edit',$product -> id) }}"
+                                                                    @if (auth()->user()->hasPermission('tags_update'))
+                                                                        <a href="{{ route('admin.tags.edit',$tag -> id) }}"
                                                                            class="px-2 ">
                                                                             <i class="la la-edit"></i>
                                                                             @lang('site.edit')
                                                                         </a>
                                                                     @endif
 
-                                                                    @if (auth()->user()->hasPermission('products_delete'))
+                                                                    @if (auth()->user()->hasPermission('tags_delete'))
                                                                         <form
-                                                                            action="{{ route('admin.products.destroy',$product -> id) }}"
+                                                                            action="{{ route('admin.tags.destroy',$tag -> id) }}"
                                                                             method="post" style="display: inline-block;">
                                                                             {{ csrf_field() }}
                                                                             {{ method_field('delete') }}

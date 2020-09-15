@@ -98,4 +98,16 @@ class SubCategoryController extends Controller
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('admin.subcategories.index');
     }
+
+    public function editactive($subcat_id)
+    {
+        try{
+            $subcat = Category::find($subcat_id);
+            $status = $subcat->active == 0 ? 1 : 0;
+            $subcat->update(['active' => $status]);
+            return redirect()->route('admin.subcategories.index')->with(['success' => 'تم تحديث الحالة بنجاح']);
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.subcategories.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+    }
 }

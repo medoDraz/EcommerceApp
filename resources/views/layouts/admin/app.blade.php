@@ -39,7 +39,7 @@
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/core/menu/menu-types/vertical-menu.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/pages/chat-application.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/app.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/custom-rtl.css')}}">
+{{--        <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/custom-rtl.css')}}">--}}
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/core/menu/menu-types/vertical-menu.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/core/colors/palette-gradient.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/core/colors/palette-gradient.css')}}">
@@ -83,9 +83,7 @@
     {{--<!-- jQuery 3 -->--}}
     <script src="{{ asset('assets/admin/js/core/libraries/jquery.min.js') }}"></script>
 
-    {{--noty--}}
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/noty/noty.css') }}">
-    <script src="{{ asset('assets/css/plugins/noty/noty.min.js') }}"></script>
+
 </head>
 <body class="vertical-layout vertical-menu 2-columns  @if(Request::is('admin/users/tickets/reply*')) chat-application @endif menu-expanded fixed-navbar"
       data-open="click" data-menu="vertical-menu" data-col="2-columns">

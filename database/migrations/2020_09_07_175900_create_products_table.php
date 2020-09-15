@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->double('purchase_price', 8, 2);
             $table->double('sale_price', 8, 2);
             $table->integer('amount');
+            $table->string('tag_ids')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
 

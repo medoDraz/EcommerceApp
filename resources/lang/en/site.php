@@ -78,6 +78,8 @@ return [
 
     'products' => 'products',
     'all_products' => 'all products',
+    'edit_product' => 'edit product',
+    'product_detail' => 'product detail',
     'add_product' => 'add new product',
     'product' => 'product',
     'purchase_price' => 'purchase price',
@@ -92,6 +94,14 @@ return [
     'body' => 'body',
     'status' => 'status',
     'title' => 'title',
+
+    'tags' => 'tags',
+    'all_tags' => 'all tags',
+    'add_tag' => 'add new tag',
+    'tag_detail' => 'tag detail',
+    'edit_tag' => 'edit tag',
+
+    'clients' => 'clients',
 
     'ar' => [
         'name' => 'name in arabic',
