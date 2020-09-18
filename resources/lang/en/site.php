@@ -2,6 +2,7 @@
 
 return [
     'dashboard' => 'dashboard',
+    'home' => 'home',
     'welcome' => 'welcome',
     'logout' => 'logout',
 
@@ -31,8 +32,13 @@ return [
     'no' => 'no',
 
     'login' => 'login',
+    'sign_in' => 'sign in',
+    'sign_up' => 'sign up',
+    'create_account' => 'Create Account',
     'remember_me' => 'remember me',
     'password' => 'password',
+    'forgot_password' => 'I forgot my password',
+
     'password_confirmation' => 'password confirmation',
 
     'added_successfully' => 'added successfully',

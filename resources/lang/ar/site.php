@@ -2,6 +2,7 @@
 
 return [
     'dashboard' => 'الرئيسيه',
+    'home' => 'الرئيسيه',
     'logout' => 'تسجيل الخروج',
 
     'add' => 'اضف',
@@ -20,8 +21,12 @@ return [
     'no' => 'لا',
 
     'login' => 'تسجيل الدخول',
+    'sign_in' => 'تسجيل الدخول',
     'remember_me' => 'تذكرني',
     'password' => 'كلمه المرور',
+    'sign_up' => 'تسجيل حساب جديد',
+    'create_account' => 'إنشاء حساب جديد',
+    'forgot_password' => 'هل نسيت كلمة المرور',
     'password_confirmation' => 'تاكيد كلمه المرور',
 
     'added_successfully' => 'تم اضافه البيانات بنجاح',

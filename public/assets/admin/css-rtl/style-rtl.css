@@ -10,3 +10,81 @@ NOTE:
 A FILE FOR RTL SUPPORT RELATED ONLY
 PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+.position-pixels.date-as-calendar {
+    display: inline-block;
+    position: relative;
+    width: 44px;
+    height: 44px;
+    margin-top: 12px;
+}
+.date-as-calendar {
+    font-style: normal;
+    font-weight: normal;
+    vertical-align: top;
+    color: rgb(73, 80, 87);
+    font-variant: normal;
+    background: white;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+    border-image: initial;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.position-pixels.date-as-calendar .weekday {
+    top: 16px;
+    font-size: 8px;
+}
+.position-pixels.date-as-calendar .weekday, .position-pixels.date-as-calendar .day, .position-pixels.date-as-calendar .month, .position-pixels.date-as-calendar .year {
+    display: block;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 1em;
+}
+.date-as-calendar .weekday, .date-as-calendar .day, .date-as-calendar .month, .date-as-calendar .year {
+    text-align: center;
+    line-height: 1;
+}
+.position-pixels.date-as-calendar .day {
+    top: 24px;
+    font-size: 17px;
+}
+.position-pixels.date-as-calendar .weekday, .position-pixels.date-as-calendar .day, .position-pixels.date-as-calendar .month, .position-pixels.date-as-calendar .year {
+    display: block;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 1em;
+}
+.date-as-calendar .weekday, .date-as-calendar .day, .date-as-calendar .month, .date-as-calendar .year {
+    text-align: center;
+    line-height: 1;
+}
+.position-pixels.date-as-calendar .month {
+    top: 0px;
+    font-size: 10px;
+    line-height: 14px;
+    height: 14px;
+}
+.position-pixels.date-as-calendar .weekday, .position-pixels.date-as-calendar .day, .position-pixels.date-as-calendar .month, .position-pixels.date-as-calendar .year {
+    display: block;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 1.5em;
+}
+.date-as-calendar .weekday, .date-as-calendar .day, .date-as-calendar .month, .date-as-calendar .year {
+    text-align: center;
+    line-height: 1;
+}
+
+.date-as-calendar .month {
+    text-transform: uppercase;
+    color: white;
+    background: #ff4961;
+}

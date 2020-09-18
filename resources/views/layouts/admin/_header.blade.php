@@ -26,20 +26,19 @@
                 <ul class="nav navbar-nav mr-auto float-left">
                     <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle hidden-xs"
                                                               href="#"><i class="ft-menu"></i></a></li>
-{{--                    <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i--}}
-{{--                                class="ficon ft-maximize"></i></a></li>--}}
+                    {{--                    <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i--}}
+                    {{--                                class="ficon ft-maximize"></i></a></li>--}}
                 </ul>
+
                 <ul class="nav navbar-nav float-right">
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                <span class="mr-1">@lang('site.welcome')
-                  <span
-                      {{--                      {{auth()->user()->name}}--}}
-                      class="user-name text-bold-700">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</span>
-                </span>
+                            <span class="mr-1">@lang('site.welcome')
+                                <span class="user-name text-bold-700">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</span>
+                            </span>
                             <span class="avatar avatar-online">
-{{--                                {{auth()->user()->image_path}}--}}
-                            <img style="height: 35px;" src="{{auth()->user()->image_path}}" alt="avatar"><i></i></span>
+                                <img style="height: 35px;" src="{{auth()->user()->image_path}}" alt="avatar"><i></i>
+                            </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href=""><i
                                     class="ft-user"></i> @lang('site.update_profile') </a>
@@ -47,7 +46,8 @@
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                 <i class="ft-power"></i> @lang('site.logout') </a>
-                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                  style="display: none;">
                                 @csrf
                             </form>
                         </div>
@@ -255,21 +255,22 @@
                                 </a>
                             </li>
                             <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center"
-                                                                href="javascript:void(0)">@lang('site.Read_all_messages')</a></li>
+                                                                href="javascript:void(0)">@lang('site.Read_all_messages')</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="dropdown dropdown-notification nav-item">
                         <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i
                                 class="ficon ft-flag"> </i></a>
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
-                            <li class="dropdown-menu-header" >
+                            <li class="dropdown-menu-header">
                                 <h6 class="dropdown-header m-0" style="text-transform: none;">
                                     <span class="grey darken-2">@lang('site.choose_your_language')</span>
                                 </h6>
                                 <span
                                     class="notification-tag badge badge-default badge-warning float-right m-0">2</span>
                             </li>
-{{--                            <li class="scrollable-container media-list w-100">--}}
+                            {{--                            <li class="scrollable-container media-list w-100">--}}
                             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                 <li class="scrollable-container media-list w-100">
                                     <div class="media">
@@ -284,6 +285,14 @@
                             @endforeach
                         </ul>
                     </li>
+                    <li>
+                        <time datetime="{{date('Y-m-d')}}" class="date-as-calendar position-pixels">
+                            <span class="weekday">{{date('D')}}</span>
+                            <span class="day">{{date('d')}}</span>
+                            <span class="month">{{date('M')}}</span>
+                        </time>
+                    </li>
+
                 </ul>
             </div>
         </div>

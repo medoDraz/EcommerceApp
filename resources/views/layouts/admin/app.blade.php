@@ -79,6 +79,7 @@
         body {
             font-family: 'Cairo', sans-serif;
         }
+
     </style>
     {{--<!-- jQuery 3 -->--}}
     <script src="{{ asset('assets/admin/js/core/libraries/jquery.min.js') }}"></script>

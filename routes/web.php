@@ -1,5 +1,6 @@
 <?php
 
+use App\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+Route::get('/contact', function () {
+    $categories=Category::defaultCategory()->get();
+    $subcategories=Category::subCategory()->get();
+    return view('contactus',compact('categories','subcategories'));
+});
+Route::get('/product_details', function () {
+    $categories=Category::defaultCategory()->get();
+    $subcategories=Category::subCategory()->get();
+    return view('product_details',compact('categories','subcategories'));
+});
+Route::get('/category', function () {
+    $categories=Category::defaultCategory()->get();
+    $subcategories=Category::subCategory()->get();
+    return view('categories',compact('categories','subcategories'));
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
