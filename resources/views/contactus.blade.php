@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    <title>@lang('site.contact_us')</title>
+    <title>Colo Shop | @lang('site.contact_us')</title>
 @endsection
 @section('content')
     <div class="container contact_container">
@@ -12,7 +12,7 @@
                 <div class="breadcrumbs d-flex flex-row align-items-center">
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Contact</a></li>
+                        <li class="active" style="color: #b5aec4;"><i class="fa fa-angle-right" aria-hidden="true"></i>Contact</li>
                     </ul>
                 </div>
 

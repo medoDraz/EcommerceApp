@@ -30,5 +30,13 @@ class Category extends Model
         return $query -> where('parent_id', '!=',0);
     }
 
+    public function _parent(){
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    public function subcat(){
+        return $this->hasMany(self::class, 'parent_id');
+    }
+
 
 }

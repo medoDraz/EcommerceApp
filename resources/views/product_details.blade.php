@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    <title>@lang('site.product')</title>
+    <title>Colo Shop | @lang('site.product')</title>
 @endsection
 @section('content')
 
@@ -14,7 +14,7 @@
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
-                        <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</a></li>
+                        <li class="active" style="color: #b5aec4;"><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</li>
                     </ul>
                 </div>
 

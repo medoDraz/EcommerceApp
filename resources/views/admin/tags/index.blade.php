@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title')
-    <title>@lang('site.tags')</title>
+    <title>Admin Panel | @lang('site.tags')</title>
 @endsection
 @section('content')
     <div class="app-content content">
@@ -47,7 +47,7 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
                                         <table
-                                            class="table display nowrap table-striped table-bordered scroll-horizontal">
+                                            class="table display nowrap table-striped table-bordered zero-configuration">
                                             <thead>
                                             <tr>
                                                 <th>#</th>
@@ -68,13 +68,13 @@
                                                             <div class="btn-group float-md-right" role="group"
                                                                  aria-label="Button group with nested dropdown">
                                                                 <button
-                                                                    class="btn btn-outline-primary dropdown-toggle dropdown-menu-right box-shadow-2 px-2"
+                                                                    class="btn btn-outline-primary dropdown-toggle dropdown-menu-right box-shadow-2 "
                                                                     id="btnGroupDrop1" type="button"
                                                                     data-toggle="dropdown" aria-haspopup="true"
                                                                     aria-expanded="false"><i
                                                                         class="ft-settings icon-left"></i>
                                                                 </button>
-                                                                <div class="dropdown-menu"
+                                                                <div class="dropdown-menu" style="min-width: 6rem;"
                                                                      aria-labelledby="btnGroupDrop1">
                                                                     @if (auth()->user()->hasPermission('tags_read'))
                                                                     <a href="{{ route('admin.tags.show',$tag -> id) }}"
@@ -99,7 +99,7 @@
                                                                             {{ csrf_field() }}
                                                                             {{ method_field('delete') }}
                                                                             <button type="submit" style="color: #1E9FF2;"
-                                                                               class="btn btn-link delete px-2 mr-1 mb-1">
+                                                                               class="btn btn-link delete px-2 mr-1 ">
                                                                                 <i class="la la-trash"></i>
                                                                                 @lang('site.delete')
                                                                             </button>

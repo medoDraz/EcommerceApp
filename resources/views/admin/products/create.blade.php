@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title')
-    <title>@lang('site.add_product')</title>
+    <title>Admin Panel | @lang('site.add_product')</title>
 @endsection
 @section('content')
 
@@ -130,9 +130,8 @@
                                                                     for="projectinput1">@lang('site.' . $locale . '.description')</label>
                                                                 <textarea type="text"
                                                                           class="form-control"
-                                                                          placeholder="  "
-                                                                          name="{{ $locale }}[description]"
-                                                                          value="{{ old($locale . '.description') }}">
+                                                                          placeholder=" "
+                                                                          name="{{ $locale }}[description]">
                                                                     {{ old($locale . '.description') }}</textarea>
                                                             </div>
                                                         </div>

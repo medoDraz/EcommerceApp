@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title')
-    <title>@lang('site.edit_admin') {{$user->first_name}}</title>
+    <title>Admin Panel | @lang('site.edit_admin') {{$user->first_name}}</title>
 @endsection
 @section('content')
 

@@ -44,7 +44,7 @@ class TagController extends Controller
         if (!$request->has('active'))
             $request->request->add(['active' => 0]);
         Tag::create($request->all());
-        session()->flash('success', __('site.added_successfully'));
+        toast( __('site.added_successfully'),'success');
         return redirect()->route('admin.tags.index');
     }
 
@@ -75,7 +75,7 @@ class TagController extends Controller
         if (!$request->has('active'))
             $request->request->add(['active' => 0]);
         $tag->update($request->all());
-        session()->flash('success', __('site.updated_successfully'));
+        toast( __('site.updated_successfully'),'success');
         return redirect()->route('admin.tags.index');
     }
 

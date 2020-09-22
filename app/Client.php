@@ -48,6 +48,12 @@ class Client extends Authenticatable
         return asset('uploads/user_images/'.$this->image);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+
+    }//end of orders
+
 //    public function getActive(){
 //        return   $this -> active == 1 ? 'مفعل'  : 'غير مفعل';
 //    }

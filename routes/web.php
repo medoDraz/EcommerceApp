@@ -1,6 +1,7 @@
 <?php
 
 use App\Category;
+use App\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,20 +19,17 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 Route::get('/contact', function () {
-    $categories=Category::defaultCategory()->get();
+    $categories=Category::defaultCategory()->where('active',1)->get();
     $subcategories=Category::subCategory()->get();
     return view('contactus',compact('categories','subcategories'));
 });
 Route::get('/product_details', function () {
-    $categories=Category::defaultCategory()->get();
+    $categories=Category::defaultCategory()->where('active',1)->get();
     $subcategories=Category::subCategory()->get();
     return view('product_details',compact('categories','subcategories'));
 });
-Route::get('/category', function () {
-    $categories=Category::defaultCategory()->get();
-    $subcategories=Category::subCategory()->get();
-    return view('categories',compact('categories','subcategories'));
-});
+Route::get('/category/{id}', 'HomeController@categories');
+Route::get('/category_ajax/{id}', 'HomeController@categoriesajax');
 
 Auth::routes();
 

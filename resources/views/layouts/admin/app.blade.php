@@ -24,23 +24,29 @@
     @if (app()->getLocale() == 'ar')
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/plugins/animate/animate.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/vendors.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/core/menu/menu-types/vertical-menu.css')}}">
+        <link rel="stylesheet" type="text/css"
+              href="{{asset('assets/admin/css-rtl/core/menu/menu-types/vertical-menu.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/pages/chat-application.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/app.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/custom-rtl.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/core/menu/menu-types/vertical-menu.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/core/colors/palette-gradient.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/core/colors/palette-gradient.css')}}">
+        <link rel="stylesheet" type="text/css"
+              href="{{asset('assets/admin/css-rtl/core/menu/menu-types/vertical-menu.css')}}">
+        <link rel="stylesheet" type="text/css"
+              href="{{asset('assets/admin/css-rtl/core/colors/palette-gradient.css')}}">
+        <link rel="stylesheet" type="text/css"
+              href="{{asset('assets/admin/css-rtl/core/colors/palette-gradient.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/pages/timeline.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/style-rtl.css')}}">
     @else
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/plugins/animate/animate.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/vendors.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/core/menu/menu-types/vertical-menu.css')}}">
+        <link rel="stylesheet" type="text/css"
+              href="{{asset('assets/admin/css/core/menu/menu-types/vertical-menu.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/pages/chat-application.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/app.css')}}">
-{{--        <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/custom-rtl.css')}}">--}}
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/core/menu/menu-types/vertical-menu.css')}}">
+        {{--        <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/custom-rtl.css')}}">--}}
+        <link rel="stylesheet" type="text/css"
+              href="{{asset('assets/admin/css/core/menu/menu-types/vertical-menu.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/core/colors/palette-gradient.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/core/colors/palette-gradient.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/pages/timeline.css')}}">
@@ -58,6 +64,8 @@
           href="{{asset('assets/admin/vendors/css/charts/chartist-plugin-tooltip.css')}}">
     <link rel="stylesheet" type="text/css"
           href="{{asset('assets/admin/vendors/css/forms/toggle/bootstrap-switch.min.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/vendors/css/forms/toggle/switchery.min.css')}}">
 
     <!-- END VENDOR CSS-->
@@ -86,8 +94,9 @@
 
 
 </head>
-<body class="vertical-layout vertical-menu 2-columns  @if(Request::is('admin/users/tickets/reply*')) chat-application @endif menu-expanded fixed-navbar"
-      data-open="click" data-menu="vertical-menu" data-col="2-columns">
+<body
+    class="vertical-layout vertical-menu 2-columns  @if(Request::is('admin/users/tickets/reply*')) chat-application @endif menu-expanded fixed-navbar"
+    data-open="click" data-menu="vertical-menu" data-col="2-columns">
 <!-- fixed-top-->
 @include('layouts.admin._header')
 <!-- ////////////////////////////////////////////////////////////////////////////-->
@@ -96,13 +105,13 @@
 @yield('content')
 
 {{--@include('admin.includes.alerts.success')--}}
+@include('sweetalert::alert')
 @include('partials._session')
 <!-- ////////////////////////////////////////////////////////////////////////////-->
 @include('layouts.admin._footer')
 
 <!-- @notify_js -->
 <!-- @notify_render -->
-
 
 
 <!-- BEGIN VENDOR JS-->
@@ -155,25 +164,63 @@
          async defer"></script> -->
 
 <script>
-    //delete
-    // $('.delete').click(function (e) {
-    //     var that = $(this)
-    //     e.preventDefault();
-    //     var n = new Noty({
-    //         text: "@lang('site.confirm_delete')",
+    // function deletefile(id) {
+    //
+    //     var res = id.split("-");
+    //
+    //     swal({
+    //         title: "Are you sure?",
+    //         text: "You want to delete " + name + "  !",
     //         type: "warning",
-    //         killer: true,
-    //         buttons: [
-    //             Noty.button("@lang('site.yes')", 'btn btn-success mr-2', function () {
-    //                 that.closest('form').submit();
-    //             }),
-    //             Noty.button("@lang('site.no')", 'btn btn-primary mr-2', function () {
-    //                 n.close();
-    //             })
-    //         ]
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#DD6B55",
+    //         confirmButtonText: "Yes, delete it!",
+    //         closeOnConfirm: false
+    //     }).then((isok) => {
+    //         if (isok) {
+    //             $.ajax({
+    //                 url: '/admin/teacher/deletefie',
+    //                 type: "GET",
+    //                 data: {id: id},
+    //
+    //                 success: function () {
+    //
+    //                     $('#x' + res[0] + res[2]).next().hide().end().hide();
+    //
+    //                     swal("Done!", "It was succesfully deleted!", "success");
+    //                 },
+    //                 error: function (xhr, ajaxOptions, thrownError) {
+    //                     swal("Error deleting!", "Please try again", "error");
+    //                 }
+    //             });
+    //         } else {
+    //             swal("Your imaginary file is safe!", {icon: "error",});
+    //
+    //         }
     //     });
-    //     n.show();
-    // });//end of delete
+    // }
+
+    delete
+        $('.delete').click(function (e) {
+            var that = $(this);
+            e.preventDefault();
+            swal({
+                title: "Are you sure?",
+                text: "You want to delete " + name + "  !",
+                type: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#ff4961",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            }).then((isok) => {
+                if (isok) {
+                    that.closest('form').submit();
+                } else {
+                    swal("Your imaginary file is safe!", {icon: "error",});
+
+                }
+            });
+        });//end of delete
     setTimeout(() => {
         jQuery('.alert').remove();
     }, 5000);
@@ -182,7 +229,7 @@
         setCurrentTime: false
     });
     $('#meridians2').timeDropper({
-        meridians: true,setCurrentTime: false
+        meridians: true, setCurrentTime: false
     });
     $('#meridians3').timeDropper({
         meridians: true,
@@ -193,34 +240,34 @@
         setCurrentTime: false
     });
     $('#meridians5').timeDropper({
-        meridians: true,setCurrentTime: false
+        meridians: true, setCurrentTime: false
     });
     $('#meridians6').timeDropper({
-        meridians: true,setCurrentTime: false
+        meridians: true, setCurrentTime: false
     });
     $('#meridians7').timeDropper({
-        meridians: true,setCurrentTime: false
+        meridians: true, setCurrentTime: false
     });
     $('#meridians8').timeDropper({
-        meridians: true,setCurrentTime: false
+        meridians: true, setCurrentTime: false
     });
     $('#meridians9').timeDropper({
-        meridians: true,setCurrentTime: false
+        meridians: true, setCurrentTime: false
     });
     $('#meridians10').timeDropper({
-        meridians: true,setCurrentTime: false
+        meridians: true, setCurrentTime: false
     });
     $('#meridians11').timeDropper({
-        meridians: true,setCurrentTime: false
+        meridians: true, setCurrentTime: false
     });
     $('#meridians12').timeDropper({
-        meridians: true,setCurrentTime: false
+        meridians: true, setCurrentTime: false
     });
     $('#meridians13').timeDropper({
-        meridians: true,setCurrentTime: false
+        meridians: true, setCurrentTime: false
     });
     $('#meridians14').timeDropper({
-        meridians: true,setCurrentTime: false
+        meridians: true, setCurrentTime: false
     });
 </script>
 @yield('script')

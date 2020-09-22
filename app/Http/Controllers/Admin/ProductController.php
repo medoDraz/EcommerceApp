@@ -45,7 +45,7 @@ class ProductController extends Controller
 //            'tag_id'=>3,
 //            'product_id'=>1
 //        ]);
-        
+
         $rules = [
             'category_id' => 'required'
         ];
@@ -119,8 +119,8 @@ class ProductController extends Controller
         foreach (config('translatable.locales') as $locale) {
 
             $rules += [$locale . '.name' => ['required', Rule::unique('product_translations', 'name')->ignore($product->id, 'product_id')]];
-            $rules += [$locale . '.description' => ['required', Rule::unique('product_translations', 'description')->ignore($product->id, 'product_id')]];
-            $rules += [$locale . '.slug' => ['required', Rule::unique('product_translations', 'slug')->ignore($product->id, 'product_id')]];
+            $rules += [$locale . '.description' => [ Rule::unique('product_translations', 'description')->ignore($product->id, 'product_id')]];
+            $rules += [$locale . '.slug' => [ Rule::unique('product_translations', 'slug')->ignore($product->id, 'product_id')]];
 
         }//end of  for each
 
@@ -133,7 +133,7 @@ class ProductController extends Controller
             $request->request->add(['active' => 0]);
 
         $request->validate($rules);
-//        dd($request);
+        dd($request);
         $request_data = $request->all();
 
         if ($request->image) {
@@ -147,6 +147,11 @@ class ProductController extends Controller
                 ->save(public_path('uploads/product_images/' . $request->image->hashName()));
             $request_data['image'] = $request->image->hashName();
         }//end of if
+        if ($request->tags){
+            $tags_id=implode(',', $request->tags);
+            $request_data['tag_ids'] = $tags_id;
+        }
+                dd($request_data);
         $product->update($request_data);
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.products.index');

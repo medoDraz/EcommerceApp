@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title')
-    <title>@lang('site.edit_tag')</title>
+    <title>Admin Panel | @lang('site.edit_tag')</title>
 @endsection
 @section('content')
 

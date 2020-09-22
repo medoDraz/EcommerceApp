@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title')
-    <title>@lang('site.add_admin')</title>
+    <title>Admin Panel | @lang('site.add_admin')</title>
 @endsection
 @section('content')
 
@@ -51,6 +51,7 @@
                                               method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
+                                            @include('partials._errors')
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">

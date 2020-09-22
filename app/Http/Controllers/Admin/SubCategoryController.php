@@ -50,7 +50,7 @@ class SubCategoryController extends Controller
         if (!$request->has('active'))
             $request->request->add(['active' => 0]);
         Category::create($request->all());
-        session()->flash('success', __('site.added_successfully'));
+        toast( __('site.added_successfully'),'success');
         return redirect()->route('admin.subcategories.index');
     }
 
@@ -86,7 +86,7 @@ class SubCategoryController extends Controller
             $request->request->add(['active' => 0]);
 //        dd($request);
         $subcategory->update($request->all());
-        session()->flash('success', __('site.updated_successfully'));
+        toast( __('site.updated_successfully'),'success');
         return redirect()->route('admin.subcategories.index');
     }
 

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -20,6 +22,7 @@ class UserController extends Controller
         $this->middleware(['permission:users_delete'])->only('destroy');
     }
 
+    public $t=[];
     public function index()
     {
         $admins=User::whereRoleIs('admin')->get();
@@ -56,7 +59,7 @@ class UserController extends Controller
         $user=User::create($request_data);
         $user->attachRole('admin');
         $user->syncPermissions($request->permissions);
-        session()->flash('success', __('site.added_successfully'));
+        toast( __('site.added_successfully'),'success');
         return redirect()->route('admin.users.index');
     }
 
@@ -100,19 +103,19 @@ class UserController extends Controller
 
         $user->update($request_data);
         $user->syncPermissions($request->permissions);
-        session()->flash('success', __('site.updated_successfully'));
+        toast( __('site.updated_successfully'),'success');
         return redirect()->route('admin.users.index');
     }
 
 
     public function destroy(User $user)
     {
-        dd($user);
+//        dd($user);
         if ($user->image != 'default.png') {
             Storage::disk('public_uploads')->delete('/user_images/' . $user->image);
         }
         $user->delete();
-//        session()->flash('success', __('site.deleted_successfully'));
+        toast( __('site.deleted_successfully'),'success');
         return redirect()->route('admin.users.index');
     }
 
@@ -122,9 +125,11 @@ class UserController extends Controller
             $user = User::find($user_id);
             $status = $user->active == 0 ? 1 : 0;
             $user->update(['active' => $status]);
-            return redirect()->route('admin.users.index')->with(['success' => 'تم تحديث الحالة بنجاح']);
+            toast( 'تم تحديث الحالة بنجاح','success');
+            return redirect()->route('admin.users.index');
         } catch (\Exception $ex) {
-            return redirect()->route('admin.users.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+            toast( 'حدث خطا ما برجاء المحاوله لاحقا','success');
+            return redirect()->route('admin.users.index');
         }
     }
 }

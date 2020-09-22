@@ -63,14 +63,23 @@
 
                                 <li class="language">
                                     <a href="#">
-                                        English
+                                        {{LaravelLocalization::getCurrentLocaleName() }}
                                         <i class="fa fa-angle-down"></i>
                                     </a>
                                     <ul class="language_selection">
-                                        <li><a href="#">French</a></li>
-                                        <li><a href="#">Italian</a></li>
-                                        <li><a href="#">German</a></li>
-                                        <li><a href="#">Spanish</a></li>
+                                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                            <li class="scrollable-container media-list w-100">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                        <a rel="alternate" style="color: #6B6F82;"
+                                                           hreflang="{{ $localeCode }}"
+                                                           href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                            {{ $properties['native'] }}
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </li>
 
@@ -121,13 +130,18 @@
                                     <ul class="categories_selection">
                                         @foreach($categories as $category)
                                             <li class="cat">
-                                                <a href="/category">{{$category->name}}</a>
-                                                @isset($subcategories)
+                                                <a href="/category/{{$category->id}}">
+                                                    {{$category->name}}
+                                                    {{--                                                    @isset($category -> subcat) <i class="fa fa-angle-right"></i> @endisset--}}
+                                                </a>
+                                                @isset($category -> subcat)
                                                     <ul class="subcategories_selection">
-                                                        @foreach($subcategories as $subcategory)
-                                                            <li>
-                                                                <a href="#">{{$subcategory->name}}</a>
-                                                            </li>
+                                                        @foreach($category -> subcat as $subcategory)
+                                                            @if($subcategory->active ==1)
+                                                                <li>
+                                                                    <a href="#">{{$subcategory->name}}</a>
+                                                                </li>
+                                                            @endif
                                                         @endforeach
                                                     </ul>
                                                 @endisset
@@ -179,7 +193,9 @@
                                 <li class="checkout">
                                     <a href="#">
                                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                        <span id="checkout_items" class="checkout_items">2</span>
+                                        @if(Auth::user())
+                                            <span id="checkout_items" class="checkout_items">{{Auth::user()->orders->count()}}</span>
+                                        @endif
                                     </a>
                                 </li>
                             </ul>
@@ -281,6 +297,6 @@
 <script src="{{asset('assets/front/js/contact_custom.js')}}"></script>
 <script src="{{asset('assets/front/js/single_custom.js')}}"></script>
 <script src="{{asset('assets/front/js/categories_custom.js')}}"></script>
-
+@yield('script')
 </body>
 </html>

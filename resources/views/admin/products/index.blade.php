@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title')
-    <title>@lang('site.products')</title>
+    <title>Admin Panel | @lang('site.products')</title>
 @endsection
 @section('content')
     <div class="app-content content">
@@ -47,7 +47,7 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
                                         <table
-                                            class="table display nowrap table-striped table-bordered scroll-horizontal">
+                                            class="table display nowrap table-striped table-bordered zero-configuration">
                                             <thead>
                                             <tr>
                                                 <th>#</th>
@@ -107,7 +107,7 @@
                                                                             {{ csrf_field() }}
                                                                             {{ method_field('delete') }}
                                                                             <button type="submit" style="color: #1E9FF2;"
-                                                                               class="btn btn-link delete px-2 mr-1 mb-1">
+                                                                               class="btn btn-link delete px-2 mr-1">
                                                                                 <i class="la la-trash"></i>
                                                                                 @lang('site.delete')
                                                                             </button>
