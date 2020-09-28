@@ -21,6 +21,7 @@ class CreateClientsTable extends Migration
             $table->string('image')->default('default.png');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->tinyInteger('active')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

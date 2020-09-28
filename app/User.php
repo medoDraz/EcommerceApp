@@ -51,7 +51,7 @@ class User extends Authenticatable
     public function getImagePathAttribute(){
         return asset('uploads/user_images/'.$this->image);
     }
-//    public function getActive(){
-//        return   $this -> active == 1 ? 'مفعل'  : 'غير مفعل';
-//    }
+    public function getActive(){
+        return   $this -> active == 1 ? 'مفعل'  : 'غير مفعل';
+    }
 }

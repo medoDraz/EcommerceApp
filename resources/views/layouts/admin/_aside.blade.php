@@ -123,27 +123,27 @@
                 </li>
             @endif
 
-            @if (auth()->user()->hasPermission('tags_read'))
-                <li class="nav-item @if(Request::is('admin/tags*')) open @endif"><a href=""><i
+            @if (auth()->user()->hasPermission('clients_read'))
+                <li class="nav-item @if(Route::current()->getName() == 'admin.clients.index') active @endif"><a href="{{route('admin.clients.index')}}"><i
                             class="la la-tags"></i>
-                        <span class="menu-title" data-i18n="nav.dash.main"> @lang('site.tags') </span>
+                        <span class="menu-title" data-i18n="nav.dash.main"> @lang('site.clients') </span>
                         <span
-                            class="badge badge badge-warning  badge-pill float-right mr-2">{{App\Tag::count()}}</span>
+                            class="badge badge badge-warning  badge-pill float-right mr-2">{{App\Client::count()}}</span>
                     </a>
-                    <ul class="menu-content">
-                        <li class="@if(Route::current()->getName() == 'admin.tags.index') active @endif">
-                            <a class="menu-item"
-                               href="{{route('admin.tags.index')}}"
-                               data-i18n="nav.dash.ecommerce"> @lang('site.show_all') </a>
-                        </li>
-                        @if (auth()->user()->hasPermission('tags_create'))
-                            <li class="@if(Route::current()->getName() == 'admin.tags.create') active @endif">
-                                <a class="menu-item" href="{{route('admin.tags.create')}}"
-                                   data-i18n="nav.dash.crypto">@lang('site.add_tag')</a>
-                            </li>
-                        @endif
+{{--                    <ul class="menu-content">--}}
+{{--                        <li class="@if(Route::current()->getName() == 'admin.tags.index') active @endif">--}}
+{{--                            <a class="menu-item"--}}
+{{--                               href="{{route('admin.tags.index')}}"--}}
+{{--                               data-i18n="nav.dash.ecommerce"> @lang('site.show_all') </a>--}}
+{{--                        </li>--}}
+{{--                        @if (auth()->user()->hasPermission('tags_create'))--}}
+{{--                            <li class="@if(Route::current()->getName() == 'admin.tags.create') active @endif">--}}
+{{--                                <a class="menu-item" href="{{route('admin.tags.create')}}"--}}
+{{--                                   data-i18n="nav.dash.crypto">@lang('site.add_tag')</a>--}}
+{{--                            </li>--}}
+{{--                        @endif--}}
 
-                    </ul>
+{{--                    </ul>--}}
                 </li>
             @endif
 

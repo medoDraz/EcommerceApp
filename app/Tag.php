@@ -17,6 +17,10 @@ class Tag extends Model
         return ucfirst($value);
     }
 
+    public function getActive(){
+        return   $this -> active == 1 ? 'مفعل'  : 'غير مفعل';
+    }
+
     public function products()
 	{
 	    return $this->belongsToMany(Product::class);

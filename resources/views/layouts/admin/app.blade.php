@@ -164,41 +164,6 @@
          async defer"></script> -->
 
 <script>
-    // function deletefile(id) {
-    //
-    //     var res = id.split("-");
-    //
-    //     swal({
-    //         title: "Are you sure?",
-    //         text: "You want to delete " + name + "  !",
-    //         type: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#DD6B55",
-    //         confirmButtonText: "Yes, delete it!",
-    //         closeOnConfirm: false
-    //     }).then((isok) => {
-    //         if (isok) {
-    //             $.ajax({
-    //                 url: '/admin/teacher/deletefie',
-    //                 type: "GET",
-    //                 data: {id: id},
-    //
-    //                 success: function () {
-    //
-    //                     $('#x' + res[0] + res[2]).next().hide().end().hide();
-    //
-    //                     swal("Done!", "It was succesfully deleted!", "success");
-    //                 },
-    //                 error: function (xhr, ajaxOptions, thrownError) {
-    //                     swal("Error deleting!", "Please try again", "error");
-    //                 }
-    //             });
-    //         } else {
-    //             swal("Your imaginary file is safe!", {icon: "error",});
-    //
-    //         }
-    //     });
-    // }
 
     delete
         $('.delete').click(function (e) {
@@ -221,6 +186,28 @@
                 }
             });
         });//end of delete
+    delete
+        $('.active').click(function (e) {
+            var that = $(this);
+            e.preventDefault();
+            swal({
+                title: "Are you sure?",
+                text: "You want to delete " + name + "  !",
+                type: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#ff4961",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            }).then((isok) => {
+                if (isok) {
+                    that.closest('form').submit();
+                } else {
+                    swal("Your imaginary file is safe!", {icon: "error",});
+
+                }
+            });
+        });//end of delete
+
     setTimeout(() => {
         jQuery('.alert').remove();
     }, 5000);

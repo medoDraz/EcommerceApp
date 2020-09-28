@@ -54,7 +54,7 @@ class Client extends Authenticatable
 
     }//end of orders
 
-//    public function getActive(){
-//        return   $this -> active == 1 ? 'مفعل'  : 'غير مفعل';
-//    }
+    public function getActive(){
+        return   $this -> active == 1 ? 'مفعل'  : 'غير مفعل';
+    }
 }

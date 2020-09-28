@@ -11,13 +11,18 @@ class SubCategoryDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Category::class, 3)->create([
+        \App\Category::create([
+		'ar' =>[
+				'name' => 'الرجال',
+				'slug' => 'الرجال',
+			],
+			'en' =>[
+				'name' => 'men',
+				'slug' => 'men',
+			],
+			'active' => 1,
             'parent_id' => \App\Category::all()->random()->id,
         ]);
     }
-    private function getRandomParentId()
-    {
-        $parent_id =  \App\Category::all()->random()->id;
-        return $parent_id;
-    }
+    
 }

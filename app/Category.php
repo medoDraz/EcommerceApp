@@ -30,6 +30,10 @@ class Category extends Model
         return $query -> where('parent_id', '!=',0);
     }
 
+    public function getActive(){
+        return   $this -> active == 1 ? 'مفعل'  : 'غير مفعل';
+    }
+
     public function _parent(){
         return $this->belongsTo(self::class, 'parent_id');
     }

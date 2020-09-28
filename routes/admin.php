@@ -28,6 +28,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
 //////////////////////////Tag Route ///////////////////////////////////////
             Route::resource('tags','TagController');
             Route::get('tags/editactive/{cat_id}', 'TagController@editactive')->name('tags.editactive');
+//////////////////////////Client Route ///////////////////////////////////////
+            Route::resource('clients','ClientController');
+            Route::get('clients/editactive/{client_id}', 'ClientController@editactive')->name('clients.editactive');
 
         });
     });

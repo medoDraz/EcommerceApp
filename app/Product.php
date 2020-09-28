@@ -30,6 +30,10 @@ class Product extends Model
         return asset('uploads/product_images/'.$this->image);
     }
 
+    public function getActive(){
+        return   $this -> active == 1 ? 'مفعل'  : 'غير مفعل';
+    }
+
     public function category() {
         return $this->belongsTo(Category::class);
     }
