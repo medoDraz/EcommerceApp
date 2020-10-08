@@ -53,7 +53,12 @@ class Client extends Authenticatable
         return $this->hasMany(Order::class);
 
     }//end of orders
+	
+	public function product_favorite()
+    {
+        return $this->hasMany(Product_Favorite::class);
 
+    }//end of products
     public function getActive(){
         return   $this -> active == 1 ? 'مفعل'  : 'غير مفعل';
     }

@@ -6,6 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+	<meta name="user-id" content="{{ auth()->user()->id ?? '' }}">
     @yield('title')
     <link rel="icon" href="{{ asset('images/logo.jpg') }}">
     <meta charset="utf-8">
@@ -34,6 +35,10 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/front/styles/main_styles.css')}}">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -41,6 +46,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	@yield('style')
 </head>
 <body>
 <div class="super_container">
@@ -151,17 +157,38 @@
 
                                     </ul>
                                 </li>
-                                <li><a href="#">shop</a></li>
-                                <li><a href="#">promotion</a></li>
-                                <li><a href="#">pages</a></li>
+                              
+                               
                                 <li><a href="#">blog</a></li>
                                 <li><a href="/contact">contact</a></li>
 
                             </ul>
+							
+							<div class="container searchbardiv" id="formsearch">
+								
+									<form role="search" action="{{ route('home') }}" method="get" id="searchform"  >
+										<div class="input-group">
+											<input type="text" id="searchbox" placeholder="search form all products...." class="form-control" name="name">
+											<div class="input-group-btn">
+												<button class="btn btn-default"  id="searchsubmit"  type="submit">
+													<strong>Search</strong>
+												</button>
+												
+											</div>
+										</div>
+									</form>
 
-
+								</div>
                             <ul class="navbar_user">
-                                <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                <li>
+									
+									<a href="#" id="sea">
+										<i class="fa fa-search openclosesearch" aria-hidden="true"></i>
+										<i class="fa fa-remove openclosesearch" style="display:none"></i>
+									</a>
+								</li>
+								
+								
                                 @if(Auth::user())
                                     <li class="user">
                                         <a><img style="height: 35px; border-radius:20px; "
@@ -191,11 +218,15 @@
                                 @endif
 
                                 <li class="checkout">
-                                    <a href="#">
+                                    <a href="{{ route('favorite') }}">
+                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                        <span id="favorite_items" class="checkout_items">{{Auth::user()? Auth::user()->product_favorite->count() : '0'}}</span>
+                                    </a>
+                                </li>
+								<li class="checkout">
+                                    <a href="{{ route('cart') }}">
                                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                        @if(Auth::user())
-                                            <span id="checkout_items" class="checkout_items">{{Auth::user()->orders->count()}}</span>
-                                        @endif
+                                        <span id="checkout_items" class="checkout_items">{{Auth::user()? Auth::user()->orders->count() : '0'}}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -207,11 +238,12 @@
 
     </header>
 
-
+<a id="button"></a>
     <div id="app">
 
-
+@include('sweetalert::alert')
         {{--        <main class="py-4">--}}
+
         @yield('content')
         {{--        </main>--}}
     </div>
@@ -285,6 +317,7 @@
     </footer>
 </div>
 
+
 <script src="{{asset('assets/front/js/jquery-3.2.1.min.js')}}"></script>
 <script src="{{asset('assets/front/styles/bootstrap4/popper.js')}}"></script>
 <script src="{{asset('assets/front/styles/bootstrap4/bootstrap.min.js')}}"></script>
@@ -292,11 +325,34 @@
 <script src="{{asset('assets/front/plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
 <script src="{{asset('assets/front/plugins/easing/easing.js')}}"></script>
 <script src="{{asset('assets/front/js/custom.js')}}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
-<script src="{{asset('assets/front/plugins/jquery-ui-1.12.1.custom/jquery-ui.js')}}"></script>
-<script src="{{asset('assets/front/js/contact_custom.js')}}"></script>
-<script src="{{asset('assets/front/js/single_custom.js')}}"></script>
-<script src="{{asset('assets/front/js/categories_custom.js')}}"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script> -->
+
+<script>
+	var btn = $('#button');
+
+	$(window).scroll(function() {
+	  if ($(window).scrollTop() > 100) {
+		btn.addClass('show');
+	  } else {
+		btn.removeClass('show');
+	  }
+	});
+
+	btn.on('click', function(e) {
+	  e.preventDefault();
+	  $('html, body').animate({scrollTop:0}, '100');
+	});
+
+	$('#sea').on('click',function(){
+		$('#formsearch').slideToggle( "fast",function(){
+			 $( '#content' ).toggleClass( "moremargin" );
+		} );
+		$('#searchbox').focus()
+		$('.openclosesearch').toggle();
+	});
+</script>
+
+
 @yield('script')
 </body>
 </html>

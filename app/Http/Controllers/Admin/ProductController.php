@@ -7,10 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\Product_Tag;
 use App\Tag;
+use App\Product_image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -40,14 +42,17 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request->tags);
+        
+		
 //        Product_Tag::create([
 //            'tag_id'=>3,
 //            'product_id'=>1
 //        ]);
 
         $rules = [
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'image' => 'image|mimes:jpg,jpeg,png',
+            //'filename.*' => 'mimes:jpg,jpeg,png'
         ];
 
         foreach (config('translatable.locales') as $locale) {
@@ -81,13 +86,34 @@ class ProductController extends Controller
             $request_data['image'] = $request->image->hashName();
 
         }//end of if
-
+		
         if ($request->tags){
             $tags_id=implode(',', $request->tags);
             $request_data['tag_ids'] = $tags_id;
         }
-        // dd($request_data);
+         //dd($request_data);
+		 DB::beginTransaction();
         $product=Product::create($request_data);
+		$images=array();
+		if($files=$request->file('filename')){
+			foreach($files as $file){
+				$ex=$file->getClientOriginalExtension();
+				$name=\Str::random(40).".".$ex;
+				Image::make($file)
+                ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save(public_path('uploads/product_images/' . $name));
+				$images[]=$name;
+				$product_image= new Product_image();
+				$product_image->product_id = $product->id;
+				$product_image->image = $name;
+				$product_image->save();
+			}
+			//$image=implode(',', $images);
+            //$request_data['images'] = $image;
+		}
+		DB::commit();
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.products.index');
 
@@ -105,7 +131,8 @@ class ProductController extends Controller
         $tags=Tag::all();
         $categories=Category::defaultCategory()->get();
         $subcategories=Category::subCategory()->get();
-        return view('admin.products.edit',compact('product','categories','subcategories','tags'));
+		$images=Product_image::where('product_id',$product->id)->get();
+        return view('admin.products.edit',compact('product','categories','subcategories','tags','images'));
     }
 
 

@@ -57,7 +57,7 @@
                                                     <div class="form-group">
                                                         <label> @lang('site.image') </label>
                                                         <label id="projectinput7" class="file center-block">
-                                                            <input type="file" id="file" name="image" class="photo">
+                                                            <input type="file" id="file" name="image" class="image">
                                                             <span class="file-custom"></span>
                                                         </label>
                                                         @error('image')
@@ -90,6 +90,9 @@
                                                                             value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                                                 @endforeach
                                                             </select>
+															@error('category_id')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -102,6 +105,9 @@
                                                                 {{--                                                                    <option class="custom-select" value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>--}}
                                                                 {{--                                                                @endforeach--}}
                                                             </select>
+															@error('subcategory_id')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                         </div>
                                                     </div>
                                                 </div>
@@ -117,6 +123,9 @@
                                                                        placeholder="  "
                                                                        name="{{ $locale }}[name]"
                                                                        value="{{ old($locale . '.name') }}">
+																@error('$locale.name')
+																	<span class="text-danger">{{$message}}</span>
+																@enderror
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -133,6 +142,9 @@
                                                                           placeholder=" "
                                                                           name="{{ $locale }}[description]">
                                                                     {{ old($locale . '.description') }}</textarea>
+																@error('$locale.description')
+																	<span class="text-danger">{{$message}}</span>
+																@enderror
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -149,6 +161,9 @@
                                                                        placeholder="  "
                                                                        name="{{ $locale }}[slug]"
                                                                        value="{{ old($locale . '.slug') }}">
+																@error('slug')
+																	<span class="text-danger">{{$message}}</span>
+																@enderror
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -165,6 +180,9 @@
                                                                    name="purchase_price"
                                                                    step="0.01"
                                                                    value="{{ old( 'purchase_price') }}">
+															@error('purchase_price')
+																	<span class="text-danger">{{$message}}</span>
+																@enderror
                                                         </div>
                                                     </div>
 
@@ -178,6 +196,10 @@
                                                                    name="sale_price"
                                                                    step="0.01"
                                                                    value="{{ old( 'sale_price') }}">
+																   
+															@error('sale_price')
+																<span class="text-danger">{{$message}}</span>
+															@enderror
                                                         </div>
                                                     </div>
 
@@ -195,6 +217,9 @@
                                                                placeholder="  "
                                                                name="amount"
                                                                value="{{ old( 'amount') }}">
+														@error('amount')
+															<span class="text-danger">{{$message}}</span>
+														@enderror
                                                     </div>
                                                 </div>
 
@@ -209,13 +234,22 @@
                                                                class="card-title ml-1">@lang('site.active')</label>
 
                                                         @error("active")
-                                                        <span class="text-danger"> </span>
+                                                        <span class="text-danger"> {{$message}}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <h4 class="form-section"><i
+                                                    class="la la-list-alt"></i>@lang('site.images')</h4>
+                                            <div class="form-group mt-1" >
+											  <input type="file" name="filename[]" class="form-control" multiple>
+											  @error("filename")
+												<span class="text-danger">{{$message}} </span>
+											  @enderror
+											</div>
+											
+											<h4 class="form-section"><i
                                                     class="la la-list-alt"></i>@lang('site.tags')</h4>
                                             <select class="select2 form-control" name="tags[]"
                                                     multiple="multiple">
@@ -252,6 +286,7 @@
 
         $(document).ready(function () {
 
+
             // $(".dropdown-toggle").dropdown();
 
             $('select[name="category_id"]').on('change', function () {
@@ -284,6 +319,8 @@
                 }
 
             });
+			
+			
         });
 
 

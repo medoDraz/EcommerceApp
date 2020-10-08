@@ -50,7 +50,7 @@ jQuery(document).ready(function($)
 
 	initMenu();
 	initTimer();
-	initFavorite();
+	//initFavorite();
 	initFixProductBorder();
 	initIsotopeFiltering();
 	initSlider();
@@ -233,7 +233,7 @@ jQuery(document).ready(function($)
 
 	*/
 
-    function initFavorite()
+    /* function initFavorite()
     {
     	if($('.favorite').length)
     	{
@@ -263,7 +263,7 @@ jQuery(document).ready(function($)
     			});
     		});
     	}
-    }
+    } */
 
     /* 
 

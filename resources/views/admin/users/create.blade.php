@@ -57,7 +57,7 @@
                                                     <div class="form-group">
                                                         <label> @lang('site.image') </label>
                                                         <label id="projectinput7" class="file center-block">
-                                                            <input type="file" id="file" name="image" class="photo">
+                                                            <input type="file" id="file" name="image" class="image">
                                                             <span class="file-custom"></span>
                                                         </label>
                                                         @error('image')

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    <title>Colo Shop | @lang('site.product')</title>
+    <title>Colo Shop | {{$product->name}}'s Collection</title>
 @endsection
 @section('content')
 
@@ -14,7 +14,7 @@
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
-                        <li class="active" style="color: #b5aec4;"><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</li>
+                        <li class="active" style="color: #b5aec4;"><i class="fa fa-angle-right" aria-hidden="true"></i>{{$product->name}}</li>
                     </ul>
                 </div>
 
@@ -28,15 +28,15 @@
                         <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
                             <div class="single_product_thumbnails">
                                 <ul>
-                                    <li><img src="images/single_1_thumb.jpg" alt="" data-image="images/single_1.jpg"></li>
-                                    <li class="active"><img src="images/single_2_thumb.jpg" alt="" data-image="images/single_2.jpg"></li>
-                                    <li><img src="images/single_3_thumb.jpg" alt="" data-image="images/single_3.jpg"></li>
+                                    <li><img src="http://127.0.0.1:8000/images/single_1_thumb.jpg" alt="" data-image="http://127.0.0.1:8000/images/single_1.jpg"></li>
+                                    <li class="active"><img src="{{$product->image_path}}" alt="" data-image="{{$product->image_path}}"></li>
+                                    <li><img src="http://127.0.0.1:8000/images/single_3_thumb.jpg" alt="" data-image="http://127.0.0.1:8000/images/single_3.jpg"></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-9 image_col order-lg-2 order-1">
                             <div class="single_product_image">
-                                <div class="single_product_image_background" style="background-image:url(images/single_2.jpg)"></div>
+                                <div class="single_product_image_background" style="background-image:url({{$product->image_path}})"></div>
                             </div>
                         </div>
                     </div>
@@ -45,14 +45,14 @@
             <div class="col-lg-5">
                 <div class="product_details">
                     <div class="product_details_title">
-                        <h2>Pocket cotton sweatshirt</h2>
-                        <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
+                        <h2>{{$product->name}}</h2>
+                        <p>{{$product->description}}</p>
                     </div>
                     <div class="free_delivery d-flex flex-row align-items-center justify-content-center">
                         <span class="ti-truck"></span><span>free delivery</span>
                     </div>
-                    <div class="original_price">$629.99</div>
-                    <div class="product_price">$495.00</div>
+                    <div class="original_price">${{$product->purchase_price}}</div>
+                    <div class="product_price">${{$product->sale_price}}</div>
                     <ul class="star_rating">
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -60,24 +60,29 @@
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
                         <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
                     </ul>
-                    <div class="product_color">
+                    {{-- <div class="product_color">
                         <span>Select Color:</span>
                         <ul>
                             <li style="background: #e54e5d"></li>
                             <li style="background: #252525"></li>
                             <li style="background: #60b3f3"></li>
                         </ul>
-                    </div>
+                    </div> --}}
                     <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
                         <span>Quantity:</span>
                         <div class="quantity_selector">
                             <span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                            <span id="amount" style="display : none">{{$product->amount}}</span>
                             <span id="quantity_value">1</span>
                             <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
                         </div>
-                        <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                        <div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
+                        
                     </div>
+					<div class="d-flex flex-column flex-sm-row align-items-sm-center">
+					<button class="red_button add_to_cart_button">sdsds</button>
+						<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+                        <div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
+					</div>
                 </div>
             </div>
         </div>
@@ -116,7 +121,7 @@
                                     <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
                                 </div>
                                 <div class="tab_image">
-                                    <img src="images/desc_1.jpg" alt="">
+                                    <img src="http://127.0.0.1:8000/images/desc_1.jpg" alt="">
                                 </div>
                                 <div class="tab_text_block">
                                     <h2>Pocket cotton sweatshirt</h2>
@@ -125,14 +130,14 @@
                             </div>
                             <div class="col-lg-5 offset-lg-2 desc_col">
                                 <div class="tab_image">
-                                    <img src="images/desc_2.jpg" alt="">
+                                    <img src="http://127.0.0.1:8000/images/desc_2.jpg" alt="">
                                 </div>
                                 <div class="tab_text_block">
                                     <h2>Pocket cotton sweatshirt</h2>
                                     <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
                                 </div>
                                 <div class="tab_image desc_last">
-                                    <img src="images/desc_3.jpg" alt="">
+                                    <img src="http://127.0.0.1:8000/images/desc_3.jpg" alt="">
                                 </div>
                             </div>
                         </div>
@@ -167,7 +172,7 @@
                                 <!-- User Review -->
 
                                 <div class="user_review_container d-flex flex-column flex-sm-row">
-                                    <div class="user">
+                                    <div class="user" style="background-color: #f8fafc;">
                                         <div class="user_pic"></div>
                                         <div class="user_rating">
                                             <ul class="star_rating">
@@ -210,34 +215,35 @@
                             </div>
 
                             <!-- Add Review -->
+							
+							@if(auth()->user())
+								<div class="col-lg-6 add_review_col">
 
-                            <div class="col-lg-6 add_review_col">
+									<div class="add_review">
+										<form id="review_form" action="post">
+											<div>
+												<h1>Add Review</h1>
+											   
+											</div>
+											<div>
+												<h1>Your Rating:</h1>
+												<ul class="user_star_rating">
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+												</ul>
+												<textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
+											</div>
+											<div class="text-left text-sm-right">
+												<button id="review_submit" type="submit" class="red_button px-2 review_submit_btn trans_300" value="Submit">submit</button>
+											</div>
+										</form>
+									</div>
 
-                                <div class="add_review">
-                                    <form id="review_form" action="post">
-                                        <div>
-                                            <h1>Add Review</h1>
-                                            <input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
-                                            <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required.">
-                                        </div>
-                                        <div>
-                                            <h1>Your Rating:</h1>
-                                            <ul class="user_star_rating">
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                            </ul>
-                                            <textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
-                                        </div>
-                                        <div class="text-left text-sm-right">
-                                            <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
-                                        </div>
-                                    </form>
-                                </div>
-
-                            </div>
+								</div>
+							@endif
 
                         </div>
                     </div>
@@ -293,4 +299,8 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
+	<script src="{{asset('assets/front/js/single_custom.js')}}"></script>
 @endsection

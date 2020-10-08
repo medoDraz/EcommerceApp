@@ -177,6 +177,10 @@ return [
         'size'                  => 'الحجم',
 
         'category_id' => 'القسم',
+		'amount' => 'الكميه',
+		'purchase_price' => 'سعر الشراء',
+		'sale_price' => 'سعر البيع',
+		'image' => 'الصوره',
 
         'ar' => [
             'name' => 'الاسم بالغه العربيه',

@@ -92,16 +92,27 @@
                                     <div class="product_image">
                                         <img src="{{$product->image_path}}" alt="">
                                     </div>
-                                    <div class="favorite favorite_left"></div>
-                                    <div
+									@if($product_favorites != null)
+									@foreach($product_favorites as $favorite)
+										<div class="favorite favorite_left @if($favorite->product_id == $product->id) active @endif" data-url="{{ route('addfavorite') }}" data-product_id="{{ $product->id }}"></div>
+                                    @endforeach
+									@else
+                                        <div class="favorite favorite_left " data-url="{{ route('addfavorite') }}" data-product_id="{{ $product->id }}"></div>
+                                    @endif
+									
+									<div
                                         class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
                                         <span>-$20</span></div>
                                     <div class="product_info">
-                                        <h6 class="product_name"><a href="/product_details">{{$product->name}}</a></h6>
+                                        <h6 class="product_name"><a href="/product_details/{{$product->id}}">{{$product->name}}</a></h6>
                                         <div class="product_price">{{$product->sale_price}}<span>$590.00</span></div>
+										<input type="hidden" id="total_price" name="total_price" value="{{$product->sale_price}}"/>
                                     </div>
                                 </div>
-                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+								
+                                <div class="red_button add_to_cart_button" data-url="{{ route('addproductcard') }}" data-product_id="{{ $product->id }}">
+									<a href="" class="add_product_card" data-url="{{ route('addproductcard') }}" data-total_price="{{ $product->sale_price }}" data-product_id="{{ $product->id }}">add to cart</a>
+								</div>
                             </div>
                         @endforeach
 
@@ -473,4 +484,127 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
+
+    <script >
+        $(document).ready(function () {
+			if($('.favorite').length)
+			{
+				var favs = $('.favorite');
+
+				favs.each(function()
+				{
+					var fav = $(this);
+					var active = false;
+					if(fav.hasClass('active'))
+					{
+						active = true;
+					}
+
+					fav.on('click', function()
+					{
+						let url = $(this).data('url');
+						let product_id = $(this).data('product_id');
+						let user_id = $('meta[name=user-id]').attr('content');
+						var favorite_count=parseInt(document.getElementById("favorite_items").innerText);
+						let data = {
+							'_token': $('meta[name=csrf-token]').attr('content'),
+							'product_id' : product_id,
+							'client_id' :user_id,
+						};
+						$.ajax({
+							url: url,
+							method: 'post',
+							data: data,
+							success: function (data) {
+								//console.log(data.messages.length);
+								
+								if (data.success === true) {
+									swal("Done!", data.message, "success");
+									if(data.save == 1){
+										document.getElementById("favorite_items").innerHTML = favorite_count+1;
+									}else{
+										document.getElementById("favorite_items").innerHTML = favorite_count-1;
+									}
+									
+									if(active)
+									{
+										fav.removeClass('active');
+										active = false;
+									}
+									else
+									{
+										fav.addClass('active');
+										active = true;
+									}
+								} else {
+									//swal.toast("Error!", data.message, "error");
+									const Toast = Swal.mixin({ //when firing the toast, the first window closes automatically
+									  toast: true,
+									  position: 'top-end',
+									  showConfirmButton: false,
+									  timer: 3000
+									});
+									Toast.fire({
+									  type: 'error',
+									  title: data.message
+									});
+								}
+							}
+						});
+						
+					});
+				});
+			}
+			
+			$('.add_product_card').on('click', function (e) {
+           
+				e.preventDefault();
+				let url = $(this).data('url');
+				let product_id = $(this).data('product_id');
+				let user_id = $('meta[name=user-id]').attr('content');
+				let price = $(this).data('total_price');
+				//console.log(user_id);
+				var order_count=parseInt(document.getElementById("checkout_items").innerText);
+				
+                let data = {
+					'_token': $('meta[name=csrf-token]').attr('content'),
+					'client_id' :user_id,
+					'product_id' : product_id,
+					'amount' : 1,
+					'total_price' : price,
+					
+				};
+                
+                 console.log(order_count);
+                $.ajax({
+					url: url,
+					method: 'post',
+					data: data,
+					success: function (data) {
+						//console.log(data.messages.length);
+						
+						if (data.success === true) {
+                            swal("Done!", data.message, "success");
+							document.getElementById("checkout_items").innerHTML = order_count+1;
+                        } else {
+                            //swal.toast("Error!", data.message, "error");
+							const Toast = Swal.mixin({ //when firing the toast, the first window closes automatically
+							  toast: true,
+							  position: 'top-end',
+							  showConfirmButton: false,
+							  timer: 3000
+							});
+							Toast.fire({
+							  type: 'error',
+							  title: data.message
+							});
+                        }
+					}
+				});
+            });
+        });
+    </script>
 @endsection

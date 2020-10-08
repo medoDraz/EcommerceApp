@@ -12,8 +12,8 @@
                 <div class="breadcrumbs d-flex flex-row align-items-center">
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li class="active" style="color: #b5aec4;"><i class="fa fa-angle-right"
-                                                                      aria-hidden="true"></i>{{$category->name}}'s
+                        <li class="active" style="color: #b5aec4;"><i class="fa fa-angle-right" aria-hidden="true"></i>
+							{{$category->name}}'s
                         </li>
                     </ul>
                 </div>
@@ -27,12 +27,11 @@
                         </div>
                         <ul class="sidebar_categories">
                             @foreach($categories as $cat)
-                                <li class="@if($cat->id == $category->id) active @endif"><a class="cat"
-                                                                                            data-id="{{$cat->id}}"
-                                                                                            href="#">@if($cat->id == $category->id)
-                                            <span><i class="fa fa-angle-double-right"
-                                                     aria-hidden="true"></i></span> @endif {{$cat->name}}</a></li>
-                                {{--                                <input value="{{$cat->id}}" hidden>--}}
+                                <li class="@if($cat->id == $category->id) active @endif">
+									<a href="/category/{{$cat->id}}">@if($cat->id == $category->id)
+										<span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+									@endif {{$cat->name}}</a>
+								</li>
                             @endforeach
                         </ul>
                     </div>
@@ -208,6 +207,7 @@
     </div>
 @endsection
 @section('script')
+<script src="{{asset('assets/front/js/categories_custom.js')}}"></script>
     <script >
 
         $(document).ready(function () {

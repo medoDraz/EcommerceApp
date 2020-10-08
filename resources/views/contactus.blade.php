@@ -87,3 +87,8 @@
         </div>
     </div>
 @endsection
+@section('script')
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
+	<script src="{{asset('assets/front/plugins/jquery-ui-1.12.1.custom/jquery-ui.js')}}"></script>
+	<script src="{{asset('assets/front/js/contact_custom.js')}}"></script>
+@endsection

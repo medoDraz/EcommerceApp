@@ -33,6 +33,11 @@ class Product extends Model
     public function getActive(){
         return   $this -> active == 1 ? 'مفعل'  : 'غير مفعل';
     }
+	
+	public function images()
+    {
+    	return $this->hasMany(Product_image::class);
+    }
 
     public function category() {
         return $this->belongsTo(Category::class);
@@ -46,6 +51,12 @@ class Product extends Model
     public function orders()
     {
         return $this->belongsToMany(Order::class, 'product_order');
+
+    }//end of orders
+	
+	public function product_favorite()
+    {
+        return $this->belongsTo(Product_Favorite::class);
 
     }//end of orders
 }

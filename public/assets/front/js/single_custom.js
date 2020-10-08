@@ -213,11 +213,16 @@ jQuery(document).ready(function($)
 			var plus = $('.plus');
 			var minus = $('.minus');
 			var value = $('#quantity_value');
+			var amount = $('#amount');
 
 			plus.on('click', function()
 			{
 				var x = parseInt(value.text());
-				value.text(x + 1);
+				if(x < parseInt(amount.text())){
+					
+					value.text(x + 1);
+				}
+				
 			});
 
 			minus.on('click', function()

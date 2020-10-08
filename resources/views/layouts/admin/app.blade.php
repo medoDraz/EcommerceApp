@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+	<meta name="user-id" content="{{ auth()->user()->id ?? '' }}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description"
@@ -101,7 +102,7 @@
 @include('layouts.admin._header')
 <!-- ////////////////////////////////////////////////////////////////////////////-->
 @include('layouts.admin._aside')
-
+<a id="button"></a>
 @yield('content')
 
 {{--@include('admin.includes.alerts.success')--}}
@@ -164,6 +165,21 @@
          async defer"></script> -->
 
 <script>
+	var btn = $('#button');
+
+	$(window).scroll(function() {
+	  if ($(window).scrollTop() > 100) {
+		btn.addClass('show');
+	  } else {
+		btn.removeClass('show');
+	  }
+	});
+
+	btn.on('click', function(e) {
+	  e.preventDefault();
+	  $('html, body').animate({scrollTop:0}, '300');
+	});
+
 
     delete
         $('.delete').click(function (e) {
