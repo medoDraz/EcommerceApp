@@ -12,13 +12,19 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index(){
-        $admins_count=User::whereRoleIs('admin')->count();
-        $products_count=Product::count();
-        $clients_count=Client::count();
-        $tags_count=Tag::count();
-        $categories_count=Category::defaultCategory()->count();
-        $subcategories_count=Category::subCategory()->count();
-        return view('admin.welcome',compact('admins_count','products_count','categories_count','subcategories_count','clients_count','tags_count'));
+    public function index()
+    {
+        $admins_count = User::whereRoleIs('admin')->count();
+        $products_count = Product::count();
+        $clients_count = Client::count();
+        $tags_count = Tag::count();
+        $categories_count = Category::defaultCategory()->count();
+        $subcategories_count = Category::subCategory()->count();
+        return view('admin.welcome', compact('admins_count', 'products_count', 'categories_count', 'subcategories_count', 'clients_count', 'tags_count'));
+    }
+
+    public function index1()
+    {
+        return view('admin.welcome1');
     }
 }

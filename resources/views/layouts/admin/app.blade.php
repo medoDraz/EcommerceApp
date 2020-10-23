@@ -94,6 +94,7 @@
     <script src="{{ asset('assets/admin/js/core/libraries/jquery.min.js') }}"></script>
 
 
+
 </head>
 <body
     class="vertical-layout vertical-menu 2-columns  @if(Request::is('admin/users/tickets/reply*')) chat-application @endif menu-expanded fixed-navbar"
@@ -114,7 +115,7 @@
 <!-- @notify_js -->
 <!-- @notify_render -->
 
-
+<script src="{{ asset('js/app.js') }}"></script>
 <!-- BEGIN VENDOR JS-->
 <script src="{{asset('assets/admin/vendors/js/vendors.min.js')}}" type="text/javascript"></script>
 <!-- BEGIN VENDOR JS-->
@@ -144,6 +145,7 @@
 <!-- END PAGE VENDOR JS-->
 <!-- BEGIN MODERN JS-->
 <script src="{{asset('assets/admin/js/core/app-menu.js')}}" type="text/javascript"></script>
+
 <script src="{{asset('assets/admin/js/core/app.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/admin/js/scripts/customizer.js')}}" type="text/javascript"></script>
 <!-- END MODERN JS-->
@@ -159,12 +161,20 @@
 <script src="{{asset('assets/admin/js/scripts/forms/checkbox-radio.js')}}" type="text/javascript"></script>
 
 <script src="{{asset('assets/admin/js/scripts/modal/components-modal.js')}}" type="text/javascript"></script>
+
 <script src="{{ asset('assets/admin/js/scripts/image_preview.js') }}"></script>
 <!-- <script src="{{ asset('assets/admin/js/scripts/googlemap.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKZAuxH9xTzD2DLY2nKSPKrgRi2_y0ejs&libraries=places&callback=initAutocomplete&language=ar&region=EG
          async defer"></script> -->
 
 <script>
+	// Enable pusher logging - don't include this in production
+	/* Pusher.logToConsole = true;
+
+	var pusher = new Pusher('5e9e7017fcbc89f676e8', {
+	  cluster: 'mt1'
+	});  */
+
 	var btn = $('#button');
 
 	$(window).scroll(function() {
@@ -177,7 +187,7 @@
 
 	btn.on('click', function(e) {
 	  e.preventDefault();
-	  $('html, body').animate({scrollTop:0}, '300');
+        $('html, body').animate({scrollTop:0}, '300');
 	});
 
 
@@ -272,7 +282,44 @@
     $('#meridians14').timeDropper({
         meridians: true, setCurrentTime: false
     });
+
+
+
 </script>
+<script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
+
+<script type="text/javascript">
+	window.Echo.join(`notefication`)
+            .here((users) => {
+                onlineuserslength = users.length;
+				console.log(users);
+                if (users.length > 1) {
+
+                }
+                let userId = $('meta[name=user-id]').attr('content');
+                users.forEach(function (user) {
+                    if (user.id == userId) {
+                        return;
+                    }
+                    $('#online-'+ user.id).css('color' , 'green');
+                });
+                // console.log(users);
+            })
+            .joining((user) => {
+				console.log(user);
+                onlineuserslength++;
+                $('#online-'+ user.id).css('color' , 'green');
+            })
+            .leaving((user) => {
+                onlineuserslength--;
+                if (onlineuserslength == 1) {
+                    $('.msg-title1').css('display', 'block');
+                }
+                $('#online-'+ user.id).css('color' , '#e3342f');
+            });
+
+</script>
+
 @yield('script')
 </body>
 </html>

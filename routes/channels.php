@@ -16,3 +16,18 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+Broadcast::channel('notefication', function ($user) {
+
+	if(\Auth::guard('web')->check())
+	{
+		return $user ;
+	}elseif(\Auth::guard('admin')->check())
+	{
+		return $user ;
+	}else
+	{
+		return false;
+	}
+
+});

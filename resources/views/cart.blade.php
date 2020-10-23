@@ -48,6 +48,9 @@
 									<div class="col-lg-10 offset-lg-1" style="margin-left: 5.333333%;">
 										<div class="cart_container">
 											<div class="cart_title">Shopping Cart</div>
+											<?php
+												$total_price=0;
+											?>
 											@foreach($orders as $order)
 												@foreach($order->products as $pro)
 													<div class="cart_items">
@@ -77,11 +80,14 @@
 																	</div>
 																	<div class="cart_item_price cart_info_col">
 																		<div class="cart_item_title">Price</div>
-																		<div class="cart_item_text">${{$pro->sale_price}}</div>
+																		<div class="cart_item_text"><small style="font-size: 100%;">$</small><small class="price_{{$order->id}}" style="font-size: 100%;">{{$pro->sale_price}}</small></div>
 																	</div>
 																	<div class="cart_item_total cart_info_col">
 																		<div class="cart_item_title">Total</div>
 																		<div class="cart_item_text "><small style="font-size: 100%;">$</small><small class="total_{{$order->id}}" style="font-size: 100%;">{{$order->amount * $pro->sale_price}}</small></div>
+																		<?php
+																			$total_price=$total_price+($order->amount * $pro->sale_price);
+																		?>
 																	</div>
 																</div>
 															</li>
@@ -93,7 +99,7 @@
 											<div class="order_total">
 												<div class="order_total_content text-md-right">
 													<div class="order_total_title">Order Total:</div>
-													<div class="order_total_amount"><small style="font-size: 100%;">$</small>2000</div>
+													<div class="order_total_amount"><small style="font-size: 100%;">$</small><small class="total_order" style="font-size: 100%;">{{$total_price}}</small></div>
 												</div>
 											</div>
 
@@ -177,11 +183,14 @@
 					var value = $('#quantity_value_'+order_id);
 					var total = $('.total_'+order_id);
 					var tot = parseFloat(total.text().replace(/,/g, ''));
+					var price = $('.price_'+order_id);
+					var price1 = parseFloat(price.text().replace(/,/g, ''));
+					//console.log(price1);
 					var x = parseFloat(value.text().replace(/,/g, ''));
 					if(x < parseInt(product_amount)){
 						
 						value.text(x + 1);
-						total.text(tot * parseFloat(value.text().replace(/,/g, '')));
+						total.text(price1 * parseFloat(value.text().replace(/,/g, '')));
 					}
 					
 				});
@@ -192,12 +201,14 @@
 					var value = $('#quantity_value_'+order_id);
 					var total = $('.total_'+order_id);
 					var tot = parseFloat(total.text().replace(/,/g, ''));
+					var price = $('.price_'+order_id);
+					var price1 = parseFloat(price.text().replace(/,/g, ''));
 					var x = parseFloat(value.text().replace(/,/g, ''));
 					if(x > 1)
 					{
 						value.text(x - 1);
-						console.log(tot / (parseFloat(value.text().replace(/,/g, ''))+x));
-						total.text(tot / parseFloat(value.text().replace(/,/g, '')));
+						//console.log(tot - price1);
+						total.text(tot - price1);
 					}
 				});
 			}

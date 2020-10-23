@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class Client extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens,Notifiable;
     /**
      * The attributes that are mass assignable.
      *
@@ -53,7 +54,7 @@ class Client extends Authenticatable
         return $this->hasMany(Order::class);
 
     }//end of orders
-	
+
 	public function product_favorite()
     {
         return $this->hasMany(Product_Favorite::class);
@@ -61,5 +62,9 @@ class Client extends Authenticatable
     }//end of products
     public function getActive(){
         return   $this -> active == 1 ? 'مفعل'  : 'غير مفعل';
+    }
+
+	public function comments(){
+        return $this->hasMany(Comment::class);
     }
 }

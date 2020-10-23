@@ -6,10 +6,14 @@ use App\Category;
 use App\Product;
 use App\Product_Order;
 use App\Order;
+use App\Comment;
+use App\User;
 use App\Product_Favorite;
 use Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Events\MessageDelivered;
+use Illuminate\Support\Facades\Notification;
 
 class HomeController extends Controller
 {
@@ -141,5 +145,23 @@ class HomeController extends Controller
 				'message' => 'product added successful'
 			]);
 		}
+	}
+//////////////////////////////Add Comment to Product//////////////////////////////////////////////////////////////
+	public function addcomment(Request $request)
+	{
+		
+		//dd($request);
+		$user=\Auth::user();
+		$user->comments()->create($request->all());
+		$data=[
+			'product_id' => $request->product_id,
+			'client_id' => $user->id,
+			'user_name'  => $user -> first_name,
+			'comment' => $request->comment,
+		];
+		$admins = User::all();
+		event( new MessageDelivered($data));
+		return redirect() -> back() -> with(['success'=> 'تم اضافه تعليقك بنجاح ']);
+		
 	}
 }

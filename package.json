@@ -14,16 +14,28 @@
         "bootstrap": "^4.0.0",
         "cross-env": "^7.0",
         "jquery": "^3.2",
+        "laravel-echo": "^1.8.1",
         "laravel-mix": "^5.0.1",
         "lodash": "^4.17.19",
         "popper.js": "^1.12",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.20.1",
         "sass-loader": "^8.0.0",
+        "socket.io-client": "^2.3.1",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-       
+        "bootstrap-vue": "^2.17.3",
+        "lang.js": "^1.1.14",
+        "laravel-vue-pagination": "^2.3.1",
+        "element-ui": "^2.13.2",
+        "vue-router": "^3.4.6",
+        "vuex": "^3.5.1",
+        "vue-count-to": "^1.0.13",
+        "vue-i18n": "^8.21.0",
+        "vue-splitpane": "^1.0.4",
+        "vuedraggable": "^2.24.0",
+        "vue-loader": "^15.9.3"
     }
 }

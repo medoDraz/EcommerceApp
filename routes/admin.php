@@ -1,11 +1,17 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
+Route::get('/admin1/index1', 'DashboardController@index1')->name('admin.welcome1');
+Route::get('/admin1/{any}',function($any){
+    return view('admin.welcome1');
+})->where('any','.*');
+
 
 Route::group(['prefix'=>'admin', 'middleware' => 'guest:admin'], function () {
     Route::get('login', 'LoginController@getLogin')->name('get.admin.login');
     Route::post('login', 'LoginController@login')->name('admin.login');
     Route::post('logout', 'LoginController@logout')->name('admin.logout');
+    Route::get('index1', 'DashboardController@index1')->name('admin.welcome1');
 });
 
 Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]],

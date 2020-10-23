@@ -324,9 +324,11 @@
 <script src="{{asset('assets/front/plugins/Isotope/isotope.pkgd.min.js')}}"></script>
 <script src="{{asset('assets/front/plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
 <script src="{{asset('assets/front/plugins/easing/easing.js')}}"></script>
-<script src="{{asset('assets/front/js/custom.js')}}"></script>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script> -->
 
+<script src="{{asset('assets/front/js/custom.js')}}"></script>
+
+<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script> -->
+<script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
 <script>
 	var btn = $('#button');
 
@@ -350,8 +352,9 @@
 		$('#searchbox').focus()
 		$('.openclosesearch').toggle();
 	});
+	
+	
 </script>
-
 
 @yield('script')
 </body>

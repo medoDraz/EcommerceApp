@@ -220,7 +220,8 @@
 								<div class="col-lg-6 add_review_col">
 
 									<div class="add_review">
-										<form id="review_form" action="post">
+										<form id="review_form" action="{{route('addcomment')}}" method="post">
+											@csrf
 											<div>
 												<h1>Add Review</h1>
 											   
@@ -228,13 +229,15 @@
 											<div>
 												<h1>Your Rating:</h1>
 												<ul class="user_star_rating">
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 													<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 												</ul>
-												<textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
+												<input type="hidden" id="rate" name="rate" value=""/>
+												<input type="hidden" id="product_id" name="product_id" value="{{$product->id}}"/>
+												<textarea id="review_message" class="input_review" name="comment"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
 											</div>
 											<div class="text-left text-sm-right">
 												<button id="review_submit" type="submit" class="red_button px-2 review_submit_btn trans_300" value="Submit">submit</button>
@@ -303,4 +306,9 @@
 
 @section('script')
 	<script src="{{asset('assets/front/js/single_custom.js')}}"></script>
+	<script>
+		
+		
+	</script>
+	
 @endsection

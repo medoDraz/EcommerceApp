@@ -247,6 +247,7 @@ jQuery(document).ready(function($)
 		if($('.user_star_rating li').length)
 		{
 			var stars = $('.user_star_rating li');
+			var rate = $('#rate');
 
 			stars.each(function()
 			{
@@ -255,14 +256,16 @@ jQuery(document).ready(function($)
 				star.on('click', function()
 				{
 					var i = star.index();
-
+					rate.val(star.index()+1);
 					stars.find('i').each(function()
 					{
+						rate.val(star.index()+1);
 						$(this).removeClass('fa-star');
 						$(this).addClass('fa-star-o');
 					});
 					for(var x = 0; x <= i; x++)
 					{
+						rate.val(star.index()+1);
 						$(stars[x]).find('i').removeClass('fa-star-o');
 						$(stars[x]).find('i').addClass('fa-star');
 					};

@@ -34,3 +34,4 @@ Route::post('/addproductcard', 'HomeController@addproductcard')->name('addproduc
 Route::get('/cart', 'HomeController@cart')->name('cart');
 Route::get('/favorite', 'HomeController@favorite')->name('favorite');
 Route::post('/addfavorite', 'HomeController@addfavorite')->name('addfavorite');
+Route::post('/addcomment', 'HomeController@addcomment')->name('addcomment');
